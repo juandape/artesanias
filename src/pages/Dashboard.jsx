@@ -1,3 +1,6 @@
+import React from 'react';
+import Link from 'next/link';
+
 import styles from '@/styles/Dashboard.module.css';
 
 const Dashboard = () => {
@@ -6,12 +9,15 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <div className={styles.dashboard__container}>
         <div>
-          <div>Proveedores</div>
-          <div>cant</div>
+          <h2>Proveedores</h2>
+          <div>Ver listado</div>
+          <Link href={'/FormularioProveedores'}>
+            <div>Crear Nuevo</div>
+          </Link>
         </div>
 
         <div>
-          <div>Planta</div>
+          <h2>Planta</h2>
           <ul>
             <li>Ultima semana</li>
             <li>fecha</li>
@@ -22,7 +28,7 @@ const Dashboard = () => {
           </ul>
         </div>
         <div>
-          <div>Bodega</div>
+          <h2>Bodega</h2>
           <ul>
             <li>MP</li>
             <li>costo</li>
@@ -31,8 +37,12 @@ const Dashboard = () => {
           </ul>
         </div>
         <div>
-          <div>Clientes</div>
+          <h2>Clientes</h2>
           <ul>
+            <Link href={'FormularioClientes'}>
+              <li>Crear nuevo Cliente</li>
+            </Link>
+
             <li>Total Clientes</li>
             <li>cant</li>
             <li>Pendiente entrega</li>
@@ -45,8 +55,6 @@ const Dashboard = () => {
             <li>$, cant clientes</li>
             <li>Recaudo por mes</li>
           </ul>
-
-
         </div>
       </div>
     </>

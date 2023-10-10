@@ -1,235 +1,219 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { MaterialReactTable } from 'material-react-table';
+import axios from 'axios';
 import Swal from 'sweetalert2';
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  MenuItem,
-  Stack,
-  TextField,
-  Tooltip,
-} from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import db from '../../public/db.json';
 
 export default function ListaClientes() {
   const router = useRouter();
-  const [formData, setFormData] = useState(null);
-  const [tableData, setTableData] = useState(() => db.clientes);
+  //data and fetching state
+  const [data, setData] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isRefetching, setIsRefetching] = useState(false);
+  const [rowCount, setRowCount] = useState(0);
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [tableData, setTableData] = useState(() => data);
   const [validationErrors, setValidationErrors] = useState({});
 
-  const handleSaveRowEdits = ({ exitEditingMode, row, values }) => {
-    if (!Object.keys(validationErrors).length) {
-      tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
-      setTableData([...tableData]);
-      console.log(tableData)
-      exitEditingMode(); //required to exit editing mode and close modal
-    }
-  };
+  const handleSaveRowEdits = useCallback(
+    async ({ row, setRow }) => {
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+      const url = `${BASE_URL}/api/clients/${id}`;
 
-  const handleCancelRowEdits = () => {
-    setValidationErrors({});
-  };
-
-  const handleDeleteRow = useCallback(async (row) => {
-    const result = await Swal.fire({
-      title: 'Are you sure you want to delete? This will permanently delete the row.',
-      showCancelButton: true,
-      confirmButtonText: 'Delete',
-    });
-
-    if (result.isConfirmed) {
-      Swal.fire('Deleted!', '', 'success');
-      tableData.splice(row.index, 1);
-      setTableData([...tableData]);
-    }
-  }, [tableData]);
-
-  const getCommonEditTextFieldProps = useCallback(
-    (cell) => {
-      return {
-        error: !!validationErrors[cell.id],
-        helperText: validationErrors[cell.id],
-        onBlur: (e) => {
-          const isValid =
-            cell.column.id === 'name'
-              ? validateName(e.target.value)
-              : cell.column.id === 'email'
-              ? validateEmail(e.target.value)
-              : cell.column.id === 'phone'
-              ? validatePhone(e.target.value)
-              : cell.column.id === 'address'
-              ? validateAddress(e.target.value)
-              : cell.column.id === 'neighborhood'
-              ? validateNeighborhood(e.target.value)
-              : cell.column.id === 'city'
-              ? validateCity(e.target.value)
-              : cell.column.id === 'instagram'
-              ? validateInstagram(e.target.value)
-              : true;
-
-          if (!isValid) {
-            setValidationErrors((prevErrors) => ({
-              ...prevErrors,
-              [cell.id]: `Invalid ${cell.column.columnDef.header}`,
-            }));
-          } else {
-            setValidationErrors((prevErrors) => {
-              const newErrors = { ...prevErrors };
-              delete newErrors[cell.id];
-              return newErrors;
-            });
-          }
-        },
-      };
+      try {
+        const res = await axios.patch(url, row);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+      setRow(row);
     },
-    [validationErrors]
+    []
   );
 
+  const handleCancelRowEdits = useCallback(
+    ({ row, setRow }) => {
+      setRow(row);
+    },
+    []
+  );
+
+  const handleDeleteRow = useCallback(
+    async ({ row }) => {
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+      const url = `${BASE_URL}/api/clients/${id}`;
+
+      try {
+        const res = await axios.delete(url);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      const newData = data.filter((d) => d.id !== row.id);
+      setData(newData);
+    },
+    [data]
+  );
+
+  //table state
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [globalFilter, setGlobalFilter] = useState('');
+  const [sorting, setSorting] = useState([]);
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   useEffect(() => {
-    const formDataString = router.query.data;
-    if (formDataString) {
-      const formDataObj = JSON.parse(formDataString);
-      setFormData(formDataObj);
-    }
-  }, [router.query.data]);
+    const fetchData = async () => {
+      if (!data.length) {
+        setIsLoading(true);
+      } else {
+        setIsRefetching(true);
+      }
+
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+      const url = new URL(`${BASE_URL}/api/clients`);
+
+      url.searchParams.set(
+        'start',
+        `${pagination.pageIndex * pagination.pageSize}`
+      );
+      url.searchParams.set('size', `${pagination.pageSize}`);
+      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+      url.searchParams.set('globalFilter', globalFilter ?? '');
+      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+
+      try {
+        const res = await axios.get(url);
+        setData(res.data);
+        setRowCount(res.data.length);
+      } catch (error) {
+        setIsError(true);
+        console.log(error);
+        return;
+      }
+      setIsError(false);
+      setIsLoading(false);
+      setIsRefetching(false);
+    };
+    fetchData();
+  }, [
+    columnFilters,
+    globalFilter,
+    pagination.pageIndex,
+    pagination.pageSize,
+    sorting,
+  ]);
 
   const columns = useMemo(
     () => [
       {
-        accessorFn: (row) => row.id,
+        accessorKey: '_id',
         header: 'Id',
-        accessor: 'id',
         enableEditing: false,
         enableSorting: false,
         enableColumnOrdering: false,
+        size: 50,
       },
       {
-        accessorFn: (row) => row.name,
+        accessorKey: 'name',
         header: 'Nombre',
-        accessor: 'name',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorFn: (row) => row.email,
+        accessorKey: 'email',
         header: 'Email',
-        accessor: 'email',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
+          type: 'email',
         }),
       },
       {
-        accessorFn: (row) => row.phone,
+        accessorKey: 'phone',
         header: 'Teléfono',
-        accessor: 'phone',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
+          type: 'number',
         }),
       },
       {
-        accessorFn: (row) => row.address,
+        accessorKey: 'address',
         header: 'Dirección',
-        accessor: 'address',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorFn: (row) => row.neighborhood,
+        accessorKey: 'neighborhood',
         header: 'Barrio',
-        accessor: 'neighborhood',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorFn: (row) => row.city,
+        accessorKey: 'city',
         header: 'Ciudad',
-        accessor: 'city',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
       {
-        accessorFn: (row) => row.instagram,
+        accessorKey: 'instagram',
         header: 'Instagram',
-        accessor: 'instagram',
-        muiTableBodyCellEditTextFielProps: ({ cell }) => ({
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...getCommonEditTextFieldProps(cell),
         }),
       },
     ],
-    [getCommonEditTextFieldProps]
+    []
   );
 
   return (
     <>
       <a href='/'>Inicio</a>
+      <h1 className='clientListTitle'>Lista de Clientes</h1>
       <div>
-        <>
-          <MaterialReactTable
-            displayColumnDefOptions={{
-              'mrt-row-actions': {
-                muiTableHeadCellProps: {
-                  align: 'center',
-                },
-                size: 120,
+        <MaterialReactTable
+          displayColumnDefOptions={{
+            'mrt-row-actions': {
+              muiTableHeadCellProps: {
+                align: 'center',
               },
-            }}
-            columns={columns}
-            data={tableData}
-            editingMode='modal' //default
-            enableColumnOrdering
-            enableEditing
-            onEditingRowSave={handleSaveRowEdits}
-            onEditingRowCancel={handleCancelRowEdits}
-            renderRowActions={({ row, table }) => (
-              <Box sx={{ display: 'flex', gap: '1rem' }}>
-                <Tooltip arrow placement='left' title='Edit'>
-                  <IconButton onClick={() => table.setEditingRow(row)}>
-                    <Edit />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip arrow placement='right' title='Delete'>
-                  <IconButton
-                    color='error'
-                    onClick={() => handleDeleteRow(row)}
-                  >
-                    <Delete />
-                  </IconButton>
-                </Tooltip>
-              </Box>
-            )}
-            />
-        </>
-        );
+              size: 120,
+            },
+          }}
+          columns={columns}
+          data={data}
+          editingMode='modal' // Default
+          enableColumnOrdering
+          enableEditing
+          onEditingRowSave={handleSaveRowEdits}
+          onEditingRowCancel={handleCancelRowEdits}
+          renderRowActions={({ row, table }) => (
+            <Box sx={{ display: 'flex', gap: '1rem' }}>
+              <Tooltip arrow placement='left' title='Edit'>
+                <IconButton onClick={handleSaveRowEdits} >
+                  <Edit />
+                </IconButton>
+              </Tooltip>
+              <Tooltip arrow placement='right' title='Delete'>
+                <IconButton color='error' onClick={handleDeleteRow}>
+                  <Delete />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          )}
+        />
       </div>
     </>
   );
 }
-
-// renderTopToolbarCustomActions={() => (
-//   <Button
-//     color='secondary'
-//     onClick={() => setCreateModalOpen(true)}
-//     variant='contained'
-//   >
-//     Create New Account
-//   </Button>
-// )}
-{/* <CreateNewAccountModal
-columns={columns}
-open={createModalOpen}
-onClose={() => setCreateModalOpen(false)}
-onSubmit={handleCreateNewRow}
-/> */}

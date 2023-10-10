@@ -1,4 +1,4 @@
-function Pedidos() {
+function Orders() {
   return (
     <div>
       <h1>Pedidos</h1>
@@ -62,4 +62,4 @@ function Pedidos() {
   );
 }
 
-export default Pedidos;
+export default Orders;

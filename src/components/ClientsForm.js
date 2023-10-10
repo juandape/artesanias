@@ -1,6 +1,12 @@
+'use client';
+
 import { useState } from 'react';
 import styles from '@styles/ClientesForm.module.css';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const url = `${BASE_URL}/api/clients`;
+console.log(url);
 
 const initialFormState = {
   name: '',
@@ -12,20 +18,24 @@ const initialFormState = {
   instagram: '',
 };
 
-function ClientesForm() {
+function ClientsForm() {
   const router = useRouter();
   const [clientes, setClientes] = useState(initialFormState);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(clientes);
-    router.push({
-      pathname: '/ListaClientes',
-      query: { data: JSON.stringify(clientes) },
-    });
+
+    try {
+      const res = await axios.post(url, clientes);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
 
     setClientes(initialFormState);
     console.log('form submitted');
+    router.push('/ListaClientes');
   };
 
   const handleChange = (e) => {
@@ -121,4 +131,4 @@ function ClientesForm() {
   );
 }
 
-export default ClientesForm;
+export default ClientsForm;

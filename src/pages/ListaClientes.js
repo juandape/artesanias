@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import mongoose from 'mongoose';
 
 export default function ListaClientes() {
   const router = useRouter();
@@ -14,33 +15,43 @@ export default function ListaClientes() {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefetching, setIsRefetching] = useState(false);
   const [rowCount, setRowCount] = useState(0);
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [tableData, setTableData] = useState(() => data);
   const [validationErrors, setValidationErrors] = useState({});
 
-  const handleSaveRowEdits = useCallback(
-    async ({ row, setRow }) => {
+  console.log(data);
+
+  //handle row edits
+  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+    if (!Object.keys(validationErrors).length) {
+      const id = new mongoose.Types.ObjectId(row._id);
       const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
       const url = `${BASE_URL}/api/clients/${id}`;
-
-      try {
-        const res = await axios.patch(url, row);
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-        return;
+      data[row.index] = values;
+      if (values.email === row.email || values._id === row.id) {
+        delete values._id;
+        delete values.email;
+        try {
+          const res = await axios.patch(url, data[row.index]);
+          console.log(res);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
       }
-      setRow(row);
-    },
-    []
-  );
 
-  const handleCancelRowEdits = useCallback(
-    ({ row, setRow }) => {
-      setRow(row);
-    },
-    []
-  );
+      setData([...data]);
+      Swal.fire({
+        icon: 'success',
+        title: 'Cliente actualizado con éxito',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      exitEditingMode(); //required to exit editing mode and close modal
+    }
+  };
+
+  const handleCancelRowEdits = () => {
+    setValidationErrors({});
+  };
 
   const handleDeleteRow = useCallback(
     async ({ row }) => {
@@ -125,53 +136,30 @@ export default function ListaClientes() {
       {
         accessorKey: 'name',
         header: 'Nombre',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
       },
       {
         accessorKey: 'email',
         header: 'Email',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-          type: 'email',
-        }),
       },
       {
         accessorKey: 'phone',
         header: 'Teléfono',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-          type: 'number',
-        }),
       },
       {
         accessorKey: 'address',
         header: 'Dirección',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
       },
       {
         accessorKey: 'neighborhood',
         header: 'Barrio',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
       },
       {
         accessorKey: 'city',
         header: 'Ciudad',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
       },
       {
         accessorKey: 'instagram',
         header: 'Instagram',
-        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
-          ...getCommonEditTextFieldProps(cell),
-        }),
       },
     ],
     []
@@ -201,7 +189,7 @@ export default function ListaClientes() {
           renderRowActions={({ row, table }) => (
             <Box sx={{ display: 'flex', gap: '1rem' }}>
               <Tooltip arrow placement='left' title='Edit'>
-                <IconButton onClick={handleSaveRowEdits} >
+                <IconButton onClick={() => table.setEditingRow(row)}>
                   <Edit />
                 </IconButton>
               </Tooltip>

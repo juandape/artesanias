@@ -14,17 +14,10 @@ const Dashboard = () => {
             <Link href={'FormularioClientes'}>
               <li>Crear nuevo Cliente</li>
             </Link>
-            <li>Total Clientes</li>
-            <li>cant</li>
-            <li>Pendiente entrega</li>
-            <li>$, cant clientes</li>
-            <li>Pendiente Fabricacion</li>
-            <li>$, cant clientes</li>
-            <li>Entregado y Pendiente cobro</li>
-            <li>$, cant clientes</li>
-            <li>Entregado y Cobrado</li>
-            <li>$, cant clientes</li>
-            <li>Recaudo por mes</li>
+            <Link href={'ListaClientes'}>
+              <li>Listado clientes</li>
+            </Link>
+
           </ul>
         </div>
         <div>

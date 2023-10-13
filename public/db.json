@@ -1,0 +1,24 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "name": "Juan David Peña",
+      "email": "juan@email.com",
+      "phone": 300234526,
+      "address": "Calle 12 # 45 - 67",
+      "neighborhood": "Laureles",
+      "city": "Medellín",
+      "instagram": "@juandavid"
+    },
+    {
+      "id": 2,
+      "name": "Andrea Aguilar",
+      "email": "andre@email.com",
+      "phone": 303678543,
+      "address": "Carrera 23 # 12 - 91",
+      "neighborhood": "Belen",
+      "city": "Medellín",
+      "instagram": "@andrea"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
-import ClientesForm from '@/components/ClientesForm';
+import ClientesForm from '@/components/ClientsForm';
 
 function FormularioClientes() {
+
   return (
     <>
       <a href='/'>Inicio</a>

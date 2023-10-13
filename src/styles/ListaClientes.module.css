@@ -1,0 +1,31 @@
+.clientListTitle {
+  font-size: 25px;
+  font-weight: bolder;
+  color: white;
+  width: 100%;
+  text-align: center;
+  background-color: purple;
+  padding: 10px;
+}
+
+.back {
+  background-color: white;
+  border: 1px solid purple;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  color: purple;
+  font-weight: bolder;
+  font-size: 15px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+}
+
+.back:hover {
+  background-color: purple;
+  color: white;
+}

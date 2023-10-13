@@ -4,7 +4,6 @@ function FormularioClientes() {
 
   return (
     <>
-      <a href='/'>Inicio</a>
       <ClientesForm />
     </>
   );

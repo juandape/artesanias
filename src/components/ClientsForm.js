@@ -47,6 +47,7 @@ function ClientsForm() {
 
   return (
     <div>
+      <a href='/' className={styles.back}>Inicio</a>
       <h1 className={styles.ClientesForm__title}>Formulario Clientes</h1>
       <form className={styles.ClientesForm__container} onSubmit={handleSubmit}>
         <label>
@@ -56,6 +57,7 @@ function ClientsForm() {
             name='name'
             value={clientes.name}
             className={styles.ClientesForm__container__input}
+            placeholder='ingresa el nombre'
             onChange={handleChange}
             required
           />
@@ -66,6 +68,8 @@ function ClientsForm() {
             type='email'
             name='email'
             value={clientes.email}
+            placeholder='correo@mail.com'
+            pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
             className={styles.ClientesForm__container__input}
             onChange={handleChange}
           />
@@ -76,6 +80,7 @@ function ClientsForm() {
             type='number'
             name='phone'
             value={clientes.phone}
+            placeholder='celular'
             className={styles.ClientesForm__container__input}
             onChange={handleChange}
             maxLength={10}
@@ -88,6 +93,7 @@ function ClientsForm() {
             type='text'
             name='address'
             value={clientes.address}
+            placeholder='calle 123 # 123-123'
             className={styles.ClientesForm__container__input}
             onChange={handleChange}
             required
@@ -99,6 +105,7 @@ function ClientsForm() {
             type='text'
             name='neighborhood'
             value={clientes.neighborhood}
+            placeholder='barrio'
             className={styles.ClientesForm__container__input}
             onChange={handleChange}
             required
@@ -110,6 +117,7 @@ function ClientsForm() {
             type='text'
             name='city'
             value={clientes.city}
+            placeholder='ingresa la ciudad'
             className={styles.ClientesForm__container__input}
             onChange={handleChange}
             required
@@ -121,11 +129,12 @@ function ClientsForm() {
             type='text'
             name='instagram'
             value={clientes.instagram}
+            placeholder='@instagram'
             className={styles.ClientesForm__container__input}
             onChange={handleChange}
           />
         </label>
-        <button type='submit'>Enviar</button>
+        <button type='submit' className={styles.back}>Enviar</button>
       </form>
     </div>
   );

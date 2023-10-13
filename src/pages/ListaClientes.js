@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import styles from '@styles/ListaClientes.module.css';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -198,8 +199,8 @@ const handleDeleteRow = useCallback(
 
   return (
     <>
-      <a href='/'>Inicio</a>
-      <h1 className='clientListTitle'>Lista de Clientes</h1>
+      <a href='/' className={styles.back}>Inicio</a>
+      <h1 className={styles.clientListTitle}>Lista de Clientes</h1>
       <div>
         <MaterialReactTable
           displayColumnDefOptions={{

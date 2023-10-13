@@ -7,6 +7,8 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import mongoose from 'mongoose';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function ListaClientes() {
   const router = useRouter();
   //data and fetching state
@@ -22,30 +24,32 @@ export default function ListaClientes() {
   //handle row edits
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
-      const id = new mongoose.Types.ObjectId(row._id);
-      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+      const id = values._id;
       const url = `${BASE_URL}/api/clients/${id}`;
       data[row.index] = values;
-      if (values.email === row.email || values._id === row.id) {
-        delete values._id;
-        delete values.email;
+
         try {
-          const res = await axios.patch(url, data[row.index]);
+          const res = await axios.patch(url, values);
           console.log(res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Cliente actualizado con éxito',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         } catch (error) {
           console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal, por favor intente de nuevo',
+            footer: `${error}`,
+          });
           return;
         }
-      }
 
       setData([...data]);
-      Swal.fire({
-        icon: 'success',
-        title: 'Cliente actualizado con éxito',
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      exitEditingMode(); //required to exit editing mode and close modal
+      exitEditingMode();
     }
   };
 
@@ -53,24 +57,35 @@ export default function ListaClientes() {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = useCallback(
-    async ({ row }) => {
-      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-      const url = `${BASE_URL}/api/clients/${id}`;
+  const handleDeleteRow = async ({ values }) => {
+    console.log('values', values);
 
-      try {
-        const res = await axios.delete(url);
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-        return;
-      }
+    const id = values._id;
+    const url = `${BASE_URL}/api/clients/${id}`;
 
-      const newData = data.filter((d) => d.id !== row.id);
-      setData(newData);
-    },
-    [data]
-  );
+    try {
+      const res = await axios.delete(url);
+      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'Cliente eliminado con éxito',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Algo salió mal, por favor intente de nuevo',
+        footer: `${error}`,
+      });
+      return;
+    }
+
+    setData([...data]);
+  }
 
   //table state
   const [columnFilters, setColumnFilters] = useState([]);
@@ -88,8 +103,6 @@ export default function ListaClientes() {
       } else {
         setIsRefetching(true);
       }
-
-      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
       const url = new URL(`${BASE_URL}/api/clients`);
 
       url.searchParams.set(

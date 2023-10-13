@@ -35,9 +35,9 @@
 }
 
 .ClientesForm__container__input:hover {
-cursor: pointer;
-background-color: rgb(176, 174, 176);
-transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: rgb(176, 174, 176);
+  transition-duration: 0.4s;
 }
 
 .ClientsForm_container_label {
@@ -110,13 +110,12 @@ transition-duration: 0.4s;
     border: 3px solid purple;
   }
 
-    .ClientesForm__container {
-        padding: 2rem;
-    }
+  .ClientesForm__container {
+    padding: 2rem;
+  }
 
-    .ClientesForm__container__input {
-        width: 100%;
-        padding: 7px;
-    }
-
+  .ClientesForm__container__input {
+    width: 100%;
+    padding: 7px;
+  }
 }

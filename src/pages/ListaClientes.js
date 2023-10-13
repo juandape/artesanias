@@ -28,25 +28,25 @@ export default function ListaClientes() {
       const url = `${BASE_URL}/api/clients/${id}`;
       data[row.index] = values;
 
-        try {
-          const res = await axios.patch(url, values);
-          console.log(res);
-          Swal.fire({
-            icon: 'success',
-            title: 'Cliente actualizado con éxito',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        } catch (error) {
-          console.log(error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo salió mal, por favor intente de nuevo',
-            footer: `${error}`,
-          });
-          return;
-        }
+      try {
+        const res = await axios.patch(url, values);
+        console.log(res);
+        Swal.fire({
+          icon: 'success',
+          title: 'Cliente actualizado con éxito',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } catch (error) {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salió mal, por favor intente de nuevo',
+          footer: `${error}`,
+        });
+        return;
+      }
 
       setData([...data]);
       exitEditingMode();
@@ -57,54 +57,51 @@ export default function ListaClientes() {
     setValidationErrors({});
   };
 
+  // Delete row
+  const handleDeleteRow = useCallback(
+    (row) => {
+      Swal.fire({
+        title: `¿Estás seguro de que deseas eliminar a ${row.getValue(
+          'name'
+        )}?`,
+        text: 'Esta acción no se puede deshacer',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const url = `${BASE_URL}/api/clients/${row.getValue('_id')}`;
+          console.log(url);
+          try {
+            const res = axios.delete(url);
+            console.log(res);
+            Swal.fire({
+              icon: 'success',
+              title: 'Cliente eliminado con éxito',
+              showConfirmButton: false,
+              timer: 1500,
+            });
 
-// Delete row
-const handleDeleteRow = useCallback(
-  (row) => {
-    Swal.fire({
-      title: `¿Estás seguro de que deseas eliminar a ${row.getValue('name')}?`,
-      text: "Esta acción no se puede deshacer",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const url = `${BASE_URL}/api/clients/${row.getValue('_id')}`;
-        console.log(url);
-        try {
-          const res = axios.delete(url);
-          console.log(res);
-          Swal.fire({
-            icon: 'success',
-            title: 'Cliente eliminado con éxito',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-
-          // Elimina el cliente de la lista después de la eliminación
-          data.splice(row.index, 1);
-          setData([...data]);
-        } catch (error) {
-          console.log(error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo salió mal, por favor intente de nuevo',
-            footer: `${error}`,
-          });
+            // Elimina el cliente de la lista después de la eliminación
+            data.splice(row.index, 1);
+            setData([...data]);
+          } catch (error) {
+            console.log(error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Algo salió mal, por favor intente de nuevo',
+              footer: `${error}`,
+            });
+          }
         }
-      }
-    });
-  },
-  [data]
-);
-
-
-
-
+      });
+    },
+    [data]
+  );
 
   //table state
   const [columnFilters, setColumnFilters] = useState([]);
@@ -199,7 +196,10 @@ const handleDeleteRow = useCallback(
 
   return (
     <>
-      <a href='/' className={styles.back}>Inicio</a>
+      <a href='/' className={styles.back}>
+        {' '}
+        ←{' '}
+      </a>
       <h1 className={styles.clientListTitle}>Lista de Clientes</h1>
       <div>
         <MaterialReactTable
@@ -216,6 +216,7 @@ const handleDeleteRow = useCallback(
           editingMode='modal' // Default
           enableColumnOrdering
           enableEditing
+          initialState={{columnVisibility: { _id: false }}}
           onEditingRowSave={handleSaveRowEdits}
           onEditingRowCancel={handleCancelRowEdits}
           renderRowActions={({ row, table }) => (

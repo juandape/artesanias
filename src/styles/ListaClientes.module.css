@@ -6,7 +6,7 @@
   text-align: center;
   background-color: purple;
   padding: 10px;
-  margin: 0
+  margin: 0;
 }
 
 .back {
@@ -19,7 +19,7 @@
   color: purple;
   font-weight: bolder;
   font-size: 15px;
-  width: 100px;
+  width: 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

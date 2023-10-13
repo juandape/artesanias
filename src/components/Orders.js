@@ -50,10 +50,14 @@ function Orders() {
         <label>
           Estado:
           <select name='estado'>
-            <option value='' disabled selected hidden>Seleccione una opción</option>
+            <option value='' disabled selected hidden>
+              Seleccione una opción
+            </option>
             <option value='pendiente'>Pendiente</option>
             <option value='asignado'>Inventario asignado</option>
-            <option value='pendientedecobro'>Despachado pendiente de cobro</option>
+            <option value='pendientedecobro'>
+              Despachado pendiente de cobro
+            </option>
             <option value='pagado'>Despachado y cancelado</option>
           </select>
         </label>

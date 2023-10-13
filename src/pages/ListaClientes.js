@@ -5,7 +5,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import mongoose from 'mongoose';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -19,7 +18,7 @@ export default function ListaClientes() {
   const [rowCount, setRowCount] = useState(0);
   const [validationErrors, setValidationErrors] = useState({});
 
-  console.log(data);
+  console.log('imprime la data', data);
 
   //handle row edits
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
@@ -57,35 +56,54 @@ export default function ListaClientes() {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = async ({ values }) => {
-    console.log('values', values);
 
-    const id = values._id;
-    const url = `${BASE_URL}/api/clients/${id}`;
+// Delete row
+const handleDeleteRow = useCallback(
+  (row) => {
+    Swal.fire({
+      title: `¿Estás seguro de que deseas eliminar a ${row.getValue('name')}?`,
+      text: "Esta acción no se puede deshacer",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const url = `${BASE_URL}/api/clients/${row.getValue('_id')}`;
+        console.log(url);
+        try {
+          const res = axios.delete(url);
+          console.log(res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Cliente eliminado con éxito',
+            showConfirmButton: false,
+            timer: 1500,
+          });
 
-    try {
-      const res = await axios.delete(url);
-      console.log(res);
-      Swal.fire({
-        icon: 'success',
-        title: 'Cliente eliminado con éxito',
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-    catch (error) {
-      console.log(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Algo salió mal, por favor intente de nuevo',
-        footer: `${error}`,
-      });
-      return;
-    }
+          // Elimina el cliente de la lista después de la eliminación
+          data.splice(row.index, 1);
+          setData([...data]);
+        } catch (error) {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal, por favor intente de nuevo',
+            footer: `${error}`,
+          });
+        }
+      }
+    });
+  },
+  [data]
+);
 
-    setData([...data]);
-  }
+
+
+
 
   //table state
   const [columnFilters, setColumnFilters] = useState([]);
@@ -207,7 +225,7 @@ export default function ListaClientes() {
                 </IconButton>
               </Tooltip>
               <Tooltip arrow placement='right' title='Delete'>
-                <IconButton color='error' onClick={handleDeleteRow}>
+                <IconButton color='error' onClick={() => handleDeleteRow(row)}>
                   <Delete />
                 </IconButton>
               </Tooltip>

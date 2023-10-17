@@ -5,11 +5,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import styles from '@styles/ListaClientes.module.css';
+import styles from '@styles/ClientsList.module.css';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function ListaClientes() {
+export default function ClientsList() {
   const router = useRouter();
   //data and fetching state
   const [data, setData] = useState([]);

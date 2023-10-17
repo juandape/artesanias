@@ -1,7 +1,7 @@
-import style from '../styles/ProveedoresForm.module.css';
+import style from '../styles/SuppliersForm.module.css';
 
 
-function ProveedoresForm() {
+function SuppliersFormComponent() {
   return (
     <div>
       <h1 className={style.ProveedoresForm__title}>Formulario Proveedores</h1>
@@ -32,4 +32,4 @@ function ProveedoresForm() {
   );
 }
 
-export default ProveedoresForm;
+export default SuppliersFormComponent;

@@ -1,6 +1,18 @@
 .dashboard__container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.dashboard__sectionBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  border: 2px solid purple;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #ebeeee;
 }
 
 .dashboard__title {
@@ -11,4 +23,46 @@
   font-weight: 600;
   color: #fff;
   background-color: purple;
+}
+
+.dashboard__sectionBox__listTitle {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: purple;
+  width: 350px;
+}
+
+.dashboard__sectionBox__listTitle:hover {
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+  color: gray
+}
+
+.dashboard__sectionBox__list {
+  list-style: none;
+}
+
+.dashboard__sectionBox__listItem {
+  border-radius: 15px;
+  border: 2px solid black;
+  padding: 15px;
+  width: 300px;
+  background-color: #f8fbfb;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 18px;
+  color: purple;
+  font-weight: bold;
+}
+
+.dashboard__sectionBox__listItem:hover {
+  font-size: 20px;
+  background-color: rgb(176, 174, 176);
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
 }

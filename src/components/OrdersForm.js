@@ -1,4 +1,7 @@
-function Orders() {
+import styles from './OrdersForm.module.css';
+
+
+export default function OrdersForm() {
   return (
     <div>
       <h1>Pedidos</h1>
@@ -65,5 +68,3 @@ function Orders() {
     </div>
   );
 }
-
-export default Orders;

@@ -25,12 +25,12 @@ const Dashboard = () => {
           </h2>
           {selected === 'clients' && menuOpen && (
             <ul className={styles.dashboard__sectionBox__list}>
-              <Link href={'ClientsFormPage'}>
+              <Link href={'/ClientsFormPage'}>
                 <li className={styles.dashboard__sectionBox__listItem}>
                   Nuevo Cliente
                 </li>
               </Link>
-              <Link href={'ClientsListPage'}>
+              <Link href={'/ClientsListPage'}>
                 <li className={styles.dashboard__sectionBox__listItem}>
                   Ver Listado
                 </li>
@@ -48,13 +48,16 @@ const Dashboard = () => {
           </h2>
           {selected === 'orders' && menuOpen && (
             <ul className={styles.dashboard__sectionBox__list}>
-              <Link href={'/OrdersFormPage'}><li className={styles.dashboard__sectionBox__listItem}>
-                Nuevo Pedido
-              </li></Link>
-
-              <li className={styles.dashboard__sectionBox__listItem}>
-                Ver Listado
-              </li>
+              <Link href={'/OrdersFormPage'}>
+                <li className={styles.dashboard__sectionBox__listItem}>
+                  Nuevo Pedido
+                </li>
+              </Link>
+              <Link href={'/OrdersListPage'}>
+                <li className={styles.dashboard__sectionBox__listItem}>
+                  Ver Listado
+                </li>
+              </Link>
             </ul>
           )}
         </div>
@@ -69,9 +72,9 @@ const Dashboard = () => {
           {selected === 'suppliers' && menuOpen && (
             <ul className={styles.dashboard__sectionBox__list}>
               <Link href={'/SuppliersFormPage'}>
-              <li className={styles.dashboard__sectionBox__listItem}>
-                Nuevo Proveedor
-              </li>
+                <li className={styles.dashboard__sectionBox__listItem}>
+                  Nuevo Proveedor
+                </li>
               </Link>
               <li className={styles.dashboard__sectionBox__listItem}>
                 Ver Listado

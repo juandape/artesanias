@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/clients`;
-console.log(url);
 
 const initialFormState = {
   name: '',
@@ -35,7 +34,7 @@ export default function ClientsForm() {
 
     setClientes(initialFormState);
     console.log('form submitted');
-    router.push('/ListaClientes');
+    router.push('/ClientListPage');
   };
 
   const handleChange = (e) => {

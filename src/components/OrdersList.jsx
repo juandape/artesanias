@@ -19,7 +19,6 @@ export default function OrdersList() {
   const [rowCount, setRowCount] = useState(0);
   const [validationErrors, setValidationErrors] = useState({});
 
-
   // Fetch clients
   const [clients, setClients] = useState([]);
   const [items, setItems] = useState([]);
@@ -181,6 +180,10 @@ export default function OrdersList() {
     sorting,
   ]);
 
+  const filterItemsById = (itemIds) => {
+    return items.filter((item) => itemIds.includes(item._id));
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -203,15 +206,18 @@ export default function OrdersList() {
             (client) => client._id === row.getValue('client')
           );
           return client ? client.name : '';
-        }
+        },
       },
       {
         accessorKey: 'items',
         header: 'Artículos',
         Cell: ({ row }) => {
-          const item = items.map((item) => <div>{item.itemCode}</div>);
-          return item
-        }
+          const itemIds = row.getValue('items');
+          const filteredItems = filterItemsById(itemIds);
+          return filteredItems.map((item) => (
+            <div key={item._id}>{item.itemCode}</div>
+          ));
+        },
       },
       {
         accessorKey: 'quantity',
@@ -220,26 +226,45 @@ export default function OrdersList() {
       {
         accessorKey: 'unitPrice',
         header: 'Precio Unitario',
+        enableEditing: false,
       },
       {
         accessorKey: 'shipment',
         header: 'Costo Envío',
+        enableEditing: false,
       },
       {
         accessorKey: 'totalPrice',
         header: 'Precio Total',
+        accessorKey: 'totalPrice',
+        header: 'Precio Total',
+        enableEditing: false,
       },
       {
         accessorKey: 'orderDate',
         header: 'Fecha Pedido',
-      },
-      {
-        accessorKey: 'deliveryDate',
-        header: 'Fecha Entrega',
+        Cell: ({ row }) => {
+          const orderDate = new Date(row.getValue('orderDate'));
+          return orderDate.toLocaleDateString();
+        },
+        enableEditing: false,
       },
       {
         accessorKey: 'deadline',
         header: 'Fecha Límite',
+        Cell: ({ row }) => {
+          const orderDate = new Date(row.getValue('deadline'));
+          return orderDate.toLocaleDateString();
+        },
+        enableEditing: false,
+      },
+      {
+        accessorKey: 'deliveryDate',
+        header: 'Fecha Entrega',
+        Cell: ({ row }) => {
+          const orderDate = new Date(row.getValue('deliveryDate'));
+          return orderDate.toLocaleDateString();
+        },
       },
       {
         accessorKey: 'status',

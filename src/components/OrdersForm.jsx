@@ -6,20 +6,18 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/orders`;
-console.log(url);
 
 const initialFormState = {
-  linea: '',
-  cliente: '',
-  codigoProducto: '',
-  cantidad: '',
-  valorUnitario: '',
-  valorTransporte: '',
-  valorTotal: '',
-  fechaSolicitud: '',
-  fechaEntregaEstimada: '',
-  fechaEntregaReal: '',
-  estado: '',
+  line: '',
+  client: '',
+  items: '',
+  quantity: '',
+  unitPrice: '',
+  shipment: '',
+ totalPrice: '',
+  orderDate: '',
+  deadline: '',
+  status: '',
 };
 
 export default function OrdersForm() {
@@ -29,6 +27,7 @@ export default function OrdersForm() {
   const [items, setItems] = useState([]);
   const [valorUnitario, setValorUnitario] = useState('');
 
+  console.log(orders);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,26 +47,26 @@ export default function OrdersForm() {
   useEffect(() => {
     // Función para calcular el valor total
     const calculateTotal = () => {
-      const cantidad = parseFloat(orders.cantidad);
+      const cantidad = parseFloat(orders.quantity);
       const unitPrice = parseFloat(valorUnitario);
-      const transporte = parseFloat(orders.valorTransporte);
+      const transporte = parseFloat(orders.shipment);
       if (!isNaN(cantidad) && !isNaN(unitPrice) && !isNaN(transporte)) {
         const total = cantidad * unitPrice + transporte;
         setOrders({
           ...orders,
-          valorTotal: total.toFixed(0), // Redondear a 2 decimales
+          totalPrice: total.toFixed(0), // Redondear a 2 decimales
         });
       } else {
         setOrders({
           ...orders,
-          valorTotal: '', // Si hay datos inválidos, establece el valor total en blanco
+          totalPrice: '', // Si hay datos inválidos, establece el valor total en blanco
         });
       }
     };
 
     calculateTotal(); // Calcula el valor total cuando cambian los valores iniciales
 
-  }, [orders.cantidad, valorUnitario, orders.valorTransporte]);
+  }, [orders.quantity, valorUnitario, orders.shipment]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +88,7 @@ export default function OrdersForm() {
     const { name, value } = e.target;
 
     // Verificar si el cambio se produce en el campo de "cantidad" o "codigoProducto"
-    if (name === 'cantidad' || name === 'codigoProducto') {
+    if (name === 'quantity' || name === 'items') {
       setOrders({
         ...orders,
         [name]: value,
@@ -98,11 +97,11 @@ export default function OrdersForm() {
       setOrders({
         ...orders,
         [name]: value,
-        valorTotal: '', // Si cambia otro campo que no sea cantidad o producto, establecer valorTotal en blanco
+        totalPrice: '', // Si cambia otro campo que no sea cantidad o producto, establecer valorTotal en blanco
       });
     }
 
-    if (name === 'codigoProducto') {
+    if (name === 'items') {
       // Encuentra el producto seleccionado en los datos de productos
       const product = items.find((item) => item.itemDescription === value);
       if (product) {
@@ -123,19 +122,19 @@ export default function OrdersForm() {
         <label className={styles.OrdersForm_container_label}>linea:</label>
         <input
           type='text'
-          name='linea'
+          name='line'
           className={styles.OrdersForm__container__input}
           placeholder='ingresa la linea'
-          value={orders.linea}
+          value={orders.line}
           onChange={handleChange}
           required
         />
 
         <label className={styles.OrdersForm_container_label}>Cliente:</label>
         <select
-          name='cliente'
+          name='client'
           className={styles.OrdersForm__container__input}
-          value={orders.cliente}
+          value={orders.client}
           onChange={handleChange}
           required
         >
@@ -153,9 +152,9 @@ export default function OrdersForm() {
           Codigo Producto:
         </label>
         <select
-          name='codigoProducto'
+          name='items'
           className={styles.OrdersForm__container__input}
-          value={orders.codigoProducto}
+          value={orders.items}
           onChange={handleChange}
           required
         >
@@ -172,10 +171,10 @@ export default function OrdersForm() {
         <label className={styles.OrdersForm_container_label}>Cantidad:</label>
         <input
           type='number'
-          name='cantidad'
+          name='quantity'
           className={styles.OrdersForm__container__input}
           placeholder='ingresa la cantidad'
-          value={orders.cantidad}
+          value={orders.quantity}
           onChange={handleChange}
           required
         />
@@ -185,7 +184,7 @@ export default function OrdersForm() {
         </label>
         <input
           type='number'
-          name='valorUnitario'
+          name='unitPrice'
           className={styles.OrdersForm__container__input}
           placeholder='Valor unitario del producto'
           value={valorUnitario}
@@ -198,10 +197,10 @@ export default function OrdersForm() {
         </label>
         <input
           type='number'
-          name='valorTransporte'
+          name='shipment'
           className={styles.OrdersForm__container__input}
           placeholder='ingresa el valor del transporte'
-          value={orders.valorTransporte}
+          value={orders.shipment}
           onChange={handleChange}
           required
         />
@@ -211,10 +210,10 @@ export default function OrdersForm() {
         </label>
         <input
           type="number"
-          name="valorTotal"
+          name="totalPrice"
           className={styles.OrdersForm__container__input}
           placeholder="Valor total"
-          value={orders.valorTotal}
+          value={orders.totalPrice}
           onChange={handleChange}
           readOnly
         />
@@ -224,9 +223,9 @@ export default function OrdersForm() {
         </label>
         <input
           type='date'
-          name='fechaSolicitud'
+          name='orderDate'
           className={styles.OrdersForm__container__input}
-          value={orders.fechaSolicitud}
+          value={orders.orderDate}
           onChange={handleChange}
           required
         />
@@ -236,18 +235,18 @@ export default function OrdersForm() {
         </label>
         <input
           type='date'
-          name='fechaEntregaEstimada'
+          name='deadline'
           className={styles.OrdersForm__container__input}
-          value={orders.fechaEntregaEstimada}
+          value={orders.deadline}
           onChange={handleChange}
           required
         />
 
         <label className={styles.OrdersForm_container_label}>Estado:</label>
         <select
-          name='estado'
+          name='status'
           className={styles.OrdersForm__container__input}
-          value={orders.estado}
+          value={orders.status}
           onChange={handleChange}
           required
         >

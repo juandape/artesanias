@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, use } from 'react';
 import { useRouter } from 'next/router';
 import { MaterialReactTable } from 'material-react-table';
 import axios from 'axios';
@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import styles from '@styles/ClientsList.module.css';
+import StatusSelect from '@components/StatusSelect';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -19,33 +20,23 @@ export default function OrdersList() {
   const [rowCount, setRowCount] = useState(0);
   const [validationErrors, setValidationErrors] = useState({});
 
-  // Fetch clients
+  // Fetch
   const [clients, setClients] = useState([]);
   const [items, setItems] = useState([]);
   useEffect(() => {
-    const fetchClients = async () => {
-      const url = `${BASE_URL}/api/clients`;
+    const fetchData = async () => {
       try {
-        const res = await axios.get(url);
-        setClients(res.data);
+        const [clientsRes, itemsRes] = await Promise.all([
+          axios.get(`${BASE_URL}/api/clients`),
+          axios.get(`${BASE_URL}/api/items`),
+        ]);
+        setClients(clientsRes.data);
+        setItems(itemsRes.data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchClients();
-  }, []);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      const url = `${BASE_URL}/api/items`;
-      try {
-        const res = await axios.get(url);
-        setItems(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchItems();
+    fetchData();
   }, []);
 
   console.log('imprime el item', items);
@@ -269,6 +260,14 @@ export default function OrdersList() {
       {
         accessorKey: 'status',
         header: 'Estado',
+        Edit: ({ cell, value, onChange }) => {
+          return (
+            <StatusSelect
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+            />
+          );
+        },
       },
     ],
     [clients]

@@ -98,6 +98,14 @@ export default function OrdersForm() {
       });
     }
 
+    if (name === 'valorUnitario') {
+      setOrders({
+        ...orders,
+        unitPrice: value,
+      });
+
+    }
+
     if (name === 'items') {
       const product = items.find((item) => item._id === value);
       if (product) {
@@ -206,7 +214,7 @@ export default function OrdersForm() {
           name='unitPrice'
           className={styles.OrdersForm__container__input}
           placeholder='Valor unitario del producto'
-          value={valorUnitario}
+          value={valorUnitario || orders.unitPrice}
           onChange={handleChange}
         />
 

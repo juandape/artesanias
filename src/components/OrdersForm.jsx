@@ -14,7 +14,7 @@ const initialFormState = {
   quantity: '',
   unitPrice: '',
   shipment: '',
- totalPrice: '',
+  totalPrice: '',
   orderDate: '',
   deadline: '',
   status: '',
@@ -65,7 +65,6 @@ export default function OrdersForm() {
     };
 
     calculateTotal(); // Calcula el valor total cuando cambian los valores iniciales
-
   }, [orders.quantity, valorUnitario, orders.shipment]);
 
   const handleSubmit = async (e) => {
@@ -86,28 +85,25 @@ export default function OrdersForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Verificar si el cambio se produce en el campo de "cantidad" o "codigoProducto"
     if (name === 'quantity' || name === 'items') {
       setOrders({
         ...orders,
         [name]: value,
+        totalPrice: '',
       });
     } else {
       setOrders({
         ...orders,
         [name]: value,
-        totalPrice: '', // Si cambia otro campo que no sea cantidad o producto, establecer valorTotal en blanco
       });
     }
 
     if (name === 'items') {
-      // Encuentra el producto seleccionado en los datos de productos
       const product = items.find((item) => item.itemDescription === value);
       if (product) {
         setValorUnitario(product.unitPrice);
       } else {
-        setValorUnitario(''); // Producto no encontrado, establece el valor unitario en blanco
+        setValorUnitario('');
       }
     }
   };
@@ -119,6 +115,29 @@ export default function OrdersForm() {
       </a>
       <h1 className={styles.OrdersForm__title}>Pedidos</h1>
       <form className={styles.OrdersForm__container} onSubmit={handleSubmit}>
+        <label className={styles.OrdersForm_container_label}>
+          Fecha Solicitud:
+        </label>
+        <input
+          type='date'
+          name='orderDate'
+          className={styles.OrdersForm__container__input}
+          value={orders.orderDate}
+          onChange={handleChange}
+          required
+        />
+
+        <label className={styles.OrdersForm_container_label}>
+          Fecha Entrega Estimada:
+        </label>
+        <input
+          type='date'
+          name='deadline'
+          className={styles.OrdersForm__container__input}
+          value={orders.deadline}
+          onChange={handleChange}
+          required
+        />
         <label className={styles.OrdersForm_container_label}>linea:</label>
         <input
           type='text'
@@ -209,37 +228,13 @@ export default function OrdersForm() {
           Valor Total:
         </label>
         <input
-          type="number"
-          name="totalPrice"
+          type='number'
+          name='totalPrice'
           className={styles.OrdersForm__container__input}
-          placeholder="Valor total"
+          placeholder='Valor total'
           value={orders.totalPrice}
           onChange={handleChange}
           readOnly
-        />
-
-        <label className={styles.OrdersForm_container_label}>
-          Fecha Solicitud:
-        </label>
-        <input
-          type='date'
-          name='orderDate'
-          className={styles.OrdersForm__container__input}
-          value={orders.orderDate}
-          onChange={handleChange}
-          required
-        />
-
-        <label className={styles.OrdersForm_container_label}>
-          Fecha Entrega Estimada:
-        </label>
-        <input
-          type='date'
-          name='deadline'
-          className={styles.OrdersForm__container__input}
-          value={orders.deadline}
-          onChange={handleChange}
-          required
         />
 
         <label className={styles.OrdersForm_container_label}>Estado:</label>

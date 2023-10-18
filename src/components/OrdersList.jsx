@@ -39,7 +39,6 @@ export default function OrdersList() {
     fetchData();
   }, []);
 
-  console.log('imprime el item', items);
   //handle row edits
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
@@ -175,6 +174,11 @@ export default function OrdersList() {
     return items.filter((item) => itemIds.includes(item._id));
   };
 
+  const handleSaveCell = (cell, value) => {
+    data[cell.row.index][cell.column.id] = value;
+    setData([...data]);
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -260,11 +264,11 @@ export default function OrdersList() {
       {
         accessorKey: 'status',
         header: 'Estado',
-        Edit: ({ cell, value, onChange }) => {
+        Edit: ({ cell, value }) => {
           return (
             <StatusSelect
               value={value}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e)=> handleSaveCell(cell, e.target.value)}
             />
           );
         },

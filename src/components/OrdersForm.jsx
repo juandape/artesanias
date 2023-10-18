@@ -99,7 +99,7 @@ export default function OrdersForm() {
     }
 
     if (name === 'items') {
-      const product = items.find((item) => item.itemDescription === value);
+      const product = items.find((item) => item._id === value);
       if (product) {
         setValorUnitario(product.unitPrice);
       } else {
@@ -161,14 +161,14 @@ export default function OrdersForm() {
             Seleccione un cliente
           </option>
           {clients.map((client) => (
-            <option key={client._id} value={client.name}>
+            <option key={client._id} value={client._id}>
               {client.name}
             </option>
           ))}
         </select>
 
         <label className={styles.OrdersForm_container_label}>
-          Codigo Producto:
+          Producto:
         </label>
         <select
           name='items'
@@ -181,7 +181,7 @@ export default function OrdersForm() {
             Seleccione un producto
           </option>
           {items.map((item) => (
-            <option key={item._id} value={item.itemDescription}>
+            <option key={item._id} value={item._id}>
               {item.itemDescription}
             </option>
           ))}
@@ -208,11 +208,10 @@ export default function OrdersForm() {
           placeholder='Valor unitario del producto'
           value={valorUnitario}
           onChange={handleChange}
-          readOnly
         />
 
         <label className={styles.OrdersForm_container_label}>
-          Valor Transporte:
+          Valor Envio:
         </label>
         <input
           type='number'

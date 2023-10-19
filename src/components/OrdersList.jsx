@@ -44,11 +44,20 @@ export default function OrdersList() {
     if (!Object.keys(validationErrors).length) {
       const id = values._id;
       const url = `${BASE_URL}/api/orders/${id}`;
-      data[row.index] = values;
+      // data[row.index] = values;
 
       try {
         const res = await axios.patch(url, values);
         console.log(res);
+        setData((prevData) => {
+          prevData.map((item, index) => {
+            if (index === row.index) {
+              return values
+            }
+            return item;
+          });
+        });
+
         Swal.fire({
           icon: 'success',
           title: 'Orden actualizada con éxito',

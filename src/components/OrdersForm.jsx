@@ -85,6 +85,7 @@ export default function OrdersForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === 'quantity' || name === 'items') {
       setOrders({
         ...orders,
@@ -98,23 +99,26 @@ export default function OrdersForm() {
       });
     }
 
-    if (name === 'valorUnitario') {
-      setOrders({
-        ...orders,
-        unitPrice: value,
-      });
-
-    }
-
     if (name === 'items') {
       const product = items.find((item) => item._id === value);
       if (product) {
         setValorUnitario(product.unitPrice);
+        setOrders({
+          ...orders,
+          items: value, // Actualiza el estado 'items'
+          unitPrice: product.unitPrice,
+        });
       } else {
         setValorUnitario('');
+        setOrders({
+          ...orders,
+          items: '', // Limpia el estado 'items'
+          unitPrice: '',
+        });
       }
     }
   };
+
 
   return (
     <div className={styles.container}>
@@ -175,9 +179,7 @@ export default function OrdersForm() {
           ))}
         </select>
 
-        <label className={styles.OrdersForm_container_label}>
-          Producto:
-        </label>
+        <label className={styles.OrdersForm_container_label}>Producto:</label>
         <select
           name='items'
           className={styles.OrdersForm__container__input}

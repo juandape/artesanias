@@ -78,10 +78,11 @@ export default function OrdersList() {
   // Delete row
   const handleDeleteRow = useCallback(
     (row) => {
+      const clientName = clients.find(
+        (client) => client._id === row.getValue('client')
+      ).name;
       Swal.fire({
-        title: `¿Estás seguro de que deseas eliminar a ${row.getValue(
-          'name'
-        )}?`,
+        title: `¿Estás seguro de que deseas eliminar a ${clientName}?`,
         text: 'Esta acción no se puede deshacer',
         icon: 'warning',
         showCancelButton: true,
@@ -103,7 +104,7 @@ export default function OrdersList() {
               timer: 1500,
             });
 
-            // Elimina el cliente de la lista después de la eliminación
+            // Elimina el cliente
             data.splice(row.index, 1);
             setData([...data]);
           } catch (error) {

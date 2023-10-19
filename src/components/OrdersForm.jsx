@@ -27,7 +27,6 @@ export default function OrdersForm() {
   const [items, setItems] = useState([]);
   const [valorUnitario, setValorUnitario] = useState('');
 
-  console.log(orders);
   useEffect(() => {
     const fetchData = async () => {
       try {

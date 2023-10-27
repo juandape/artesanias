@@ -5,7 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import styles from '@styles/ClientsList.module.css';
+import styles from '@styles/List.module.css';
 import StatusSelect from '@components/StatusSelect';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -295,7 +295,7 @@ export default function OrdersList() {
         {' '}
         ←{' '}
       </a>
-      <h1 className={styles.clientListTitle}>Lista de Pedidos</h1>
+      <h1 className={styles.ListTitle}>Lista de Pedidos</h1>
       <div>
         <MaterialReactTable
           displayColumnDefOptions={{

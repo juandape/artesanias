@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '@/styles/SuppliersForm.module.css';
+import Swal from 'sweetalert2';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const url = `${BASE_URL}/api/suppliers`;
@@ -33,6 +34,13 @@ export default function SuppliersForm() {
 
     setProveedores(initialFormState);
     console.log('form submitted');
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Proveedor creado',
+      showConfirmButton: false,
+      timer: 1500,
+    });
     router.push('/SuppliersListPage');
   }
 

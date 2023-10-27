@@ -102,17 +102,29 @@ const Dashboard = () => {
                     Nuevo Producto
                   </li>
                 </Link>
-                <li className={styles.dashboard__sectionBox__listItem__bodega}>
-                  Ver Lista de Productos
-                </li>
+                <Link href={'ItemsListPage'}>
+                  <li
+                    className={styles.dashboard__sectionBox__listItem__bodega}
+                  >
+                    Ver Lista de Productos
+                  </li>
+                </Link>
               </div>
               <div className={styles.dashboard__sectionBox__div}>
-                <li className={styles.dashboard__sectionBox__listItem__bodega}>
-                  Nuevo Insumo
-                </li>
-                <li className={styles.dashboard__sectionBox__listItem__bodega}>
-                  Ver Lista de Insumos
-                </li>
+                <Link href={'/SuppliesFormPage'}>
+                  <li
+                    className={styles.dashboard__sectionBox__listItem__bodega}
+                  >
+                    Nuevo Insumo
+                  </li>
+                </Link>
+                <Link href={'SuppliesListPage'}>
+                  <li
+                    className={styles.dashboard__sectionBox__listItem__bodega}
+                  >
+                    Ver Lista de Insumos
+                  </li>
+                </Link>
               </div>
             </ul>
           )}

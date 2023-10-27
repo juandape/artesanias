@@ -17,6 +17,7 @@ const initialFormState = {
   unitPrice: '',
   weight: '',
   estimatedMinUn: '',
+  quantity: '',
 };
 
 export default function ClientsForm() {
@@ -43,7 +44,7 @@ export default function ClientsForm() {
       showConfirmButton: false,
       timer: 1500,
     });
-    // router.push('/ItemsListPage');
+    router.push('/ItemsListPage');
   };
 
   const handleChange = (e) => {
@@ -134,6 +135,7 @@ export default function ClientsForm() {
           placeholder='ingresa el peso del producto'
           className={styles.Form__container__input}
           onChange={handleChange}
+          required
         />
 
         <button type='submit' className={styles.button}>

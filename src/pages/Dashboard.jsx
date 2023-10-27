@@ -76,9 +76,11 @@ const Dashboard = () => {
                   Nuevo Proveedor
                 </li>
               </Link>
-              <li className={styles.dashboard__sectionBox__listItem}>
-                Ver Listado
-              </li>
+              <Link href={'/SuppliersListPage'}>
+                <li className={styles.dashboard__sectionBox__listItem}>
+                  Ver Listado
+                </li>
+              </Link>
             </ul>
           )}
         </div>

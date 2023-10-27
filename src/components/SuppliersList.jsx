@@ -9,7 +9,7 @@ import styles from '@styles/ClientsList.module.css';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function ClientsList() {
+export default function SuppliersList() {
   const router = useRouter();
   //data and fetching state
   const [data, setData] = useState([]);
@@ -23,7 +23,7 @@ export default function ClientsList() {
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
       const id = values._id;
-      const url = `${BASE_URL}/api/clients/${id}`;
+      const url = `${BASE_URL}/api/suppliers/${id}`;
       data[row.index] = values;
 
       try {
@@ -31,7 +31,7 @@ export default function ClientsList() {
         console.log(res);
         Swal.fire({
           icon: 'success',
-          title: 'Cliente actualizado con éxito',
+          title: 'Proveedor actualizado con éxito',
           showConfirmButton: false,
           timer: 1500,
         });
@@ -71,7 +71,7 @@ export default function ClientsList() {
         cancelButtonText: 'Cancelar',
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const url = `${BASE_URL}/api/clients/${row.getValue('_id')}`;
+          const url = `${BASE_URL}/api/suppliers/${row.getValue('_id')}`;
           console.log(url);
           try {
             const res = axios.delete(url);
@@ -117,7 +117,7 @@ export default function ClientsList() {
       } else {
         setIsRefetching(true);
       }
-      const url = new URL(`${BASE_URL}/api/clients`);
+      const url = new URL(`${BASE_URL}/api/suppliers`);
 
       url.searchParams.set(
         'start',
@@ -162,31 +162,23 @@ export default function ClientsList() {
       },
       {
         accessorKey: 'name',
-        header: 'Nombre',
+        header: 'Nombre Proveedor',
+      },
+      {
+        accessorKey: 'nit',
+        header: 'NIT',
       },
       {
         accessorKey: 'email',
         header: 'Email',
       },
       {
-        accessorKey: 'phone',
-        header: 'Teléfono',
-      },
-      {
         accessorKey: 'address',
         header: 'Dirección',
       },
       {
-        accessorKey: 'neighborhood',
-        header: 'Barrio',
-      },
-      {
-        accessorKey: 'city',
-        header: 'Ciudad',
-      },
-      {
-        accessorKey: 'instagram',
-        header: 'Instagram',
+        accessorKey: 'phone',
+        header: 'Teléfono',
       },
     ],
     []

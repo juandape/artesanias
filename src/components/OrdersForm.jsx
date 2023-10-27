@@ -124,46 +124,46 @@ export default function OrdersForm() {
       <a href='/' className={styles.back}>
         ←
       </a>
-      <h1 className={styles.Form__title}>Pedidos</h1>
-      <form className={styles.Form__container} onSubmit={handleSubmit}>
-        <label className={styles.Form_container_label}>
+      <h1 className={styles.OrdersForm__title}>Pedidos</h1>
+      <form className={styles.OrdersForm__container} onSubmit={handleSubmit}>
+        <label className={styles.OrdersForm_container_label}>
           Fecha Solicitud:
         </label>
         <input
           type='date'
           name='orderDate'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           value={orders.orderDate}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.Form_container_label}>
+        <label className={styles.OrdersForm_container_label}>
           Fecha Entrega Estimada:
         </label>
         <input
           type='date'
           name='deadline'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           value={orders.deadline}
           onChange={handleChange}
           required
         />
-        <label className={styles.Form_container_label}>linea:</label>
+        <label className={styles.OrdersForm_container_label}>linea:</label>
         <input
           type='text'
           name='line'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           placeholder='ingresa la linea'
           value={orders.line}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.Form_container_label}>Cliente:</label>
+        <label className={styles.OrdersForm_container_label}>Cliente:</label>
         <select
           name='client'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           value={orders.client}
           onChange={handleChange}
           required
@@ -178,10 +178,10 @@ export default function OrdersForm() {
           ))}
         </select>
 
-        <label className={styles.Form_container_label}>Producto:</label>
+        <label className={styles.OrdersForm_container_label}>Producto:</label>
         <select
           name='items'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           value={orders.items}
           onChange={handleChange}
           required
@@ -196,59 +196,59 @@ export default function OrdersForm() {
           ))}
         </select>
 
-        <label className={styles.Form_container_label}>Cantidad:</label>
+        <label className={styles.OrdersForm_container_label}>Cantidad:</label>
         <input
           type='number'
           name='quantity'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           placeholder='ingresa la cantidad'
           value={orders.quantity}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.Form_container_label}>
+        <label className={styles.OrdersForm_container_label}>
           Valor Unitario:
         </label>
         <input
           type='number'
           name='unitPrice'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           placeholder='Valor unitario del producto'
           value={valorUnitario || orders.unitPrice}
           onChange={handleChange}
         />
 
-        <label className={styles.Form_container_label}>
+        <label className={styles.OrdersForm_container_label}>
           Valor Envio:
         </label>
         <input
           type='number'
           name='shipment'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           placeholder='ingresa el valor del transporte'
           value={orders.shipment}
           onChange={handleChange}
           required
         />
 
-        <label className={styles.Form_container_label}>
+        <label className={styles.OrdersForm_container_label}>
           Valor Total:
         </label>
         <input
           type='number'
           name='totalPrice'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           placeholder='Valor total'
           value={orders.totalPrice}
           onChange={handleChange}
           readOnly
         />
 
-        <label className={styles.Form_container_label}>Estado:</label>
+        <label className={styles.OrdersForm_container_label}>Estado:</label>
         <select
           name='status'
-          className={styles.Form__container__input}
+          className={styles.OrdersForm__container__input}
           value={orders.status}
           onChange={handleChange}
           required

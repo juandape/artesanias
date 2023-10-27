@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import styles from '@styles/ClientsForm.module.css';
+import styles from '@styles/Form.module.css';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -58,16 +58,16 @@ export default function ClientsForm() {
       <a href='/' className={styles.back}>
         ←
       </a>
-      <h1 className={styles.ClientesForm__title}>Formulario Clientes</h1>
-      <form className={styles.ClientesForm__container} onSubmit={handleSubmit}>
-        <label className={styles.ClientsForm_container_label}>
+      <h1 className={styles.Form__title}>Formulario Clientes</h1>
+      <form className={styles.Form__container} onSubmit={handleSubmit}>
+        <label className={styles.Form_container_label}>
           Nombre Cliente:
         </label>
         <input
           type='text'
           name='name'
           value={clientes.name}
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           placeholder='ingresa el nombre'
           onChange={handleChange}
           required
@@ -80,7 +80,7 @@ export default function ClientsForm() {
           value={clientes.email}
           placeholder='correo@mail.com'
           pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           onChange={handleChange}
         />
 
@@ -90,7 +90,7 @@ export default function ClientsForm() {
           name='phone'
           value={clientes.phone}
           placeholder='celular'
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           onChange={handleChange}
           maxLength={10}
           required
@@ -102,7 +102,7 @@ export default function ClientsForm() {
           name='address'
           value={clientes.address}
           placeholder='calle 123 # 123-123'
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           onChange={handleChange}
           required
         />
@@ -113,7 +113,7 @@ export default function ClientsForm() {
           name='neighborhood'
           value={clientes.neighborhood}
           placeholder='barrio'
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           onChange={handleChange}
           required
         />
@@ -124,7 +124,7 @@ export default function ClientsForm() {
           name='city'
           value={clientes.city}
           placeholder='ingresa la ciudad'
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           onChange={handleChange}
           required
         />
@@ -135,7 +135,7 @@ export default function ClientsForm() {
           name='instagram'
           value={clientes.instagram}
           placeholder='@instagram'
-          className={styles.ClientesForm__container__input}
+          className={styles.Form__container__input}
           onChange={handleChange}
         />
 

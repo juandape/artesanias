@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import styles from '@/styles/SuppliersForm.module.css';
+import styles from '@/styles/Form.module.css';
 import Swal from 'sweetalert2';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -56,58 +56,63 @@ export default function SuppliersForm() {
        <a href='/' className={styles.back}>
         ←
       </a>
-      <h1 className={styles.ProveedoresForm__title}>Formulario Proveedores</h1>
-      <form className={styles.ProveedoresForm__container} onSubmit={handleSubmit}>
-        <label className={styles.ProveedoresForm_container_label}>
+      <h1 className={styles.Form__title}>Formulario Proveedores</h1>
+      <form className={styles.Form__container} onSubmit={handleSubmit}>
+        <label className={styles.Form_container_label}>
           Nombre Proveedor:
         </label>
         <input
           type='text'
           name='name'
-          className={styles.ProveedoresForm__container__input}
+          value={proveedores.name}
+          className={styles.Form__container__input}
           placeholder='Nombre Proveedor'
           onChange={handleChange}
           required
         />
 
-        <label className={styles.ProveedoresForm_container_label}>NIT:</label>
+        <label className={styles.Form_container_label}>NIT:</label>
         <input
           type='number'
           name='nit'
-          className={styles.ProveedoresForm__container__input}
+          value={proveedores.nit}
+          className={styles.Form__container__input}
           placeholder='NIT'
           onChange={handleChange}
           required
         />
 
-        <label className={styles.ProveedoresForm_container_label}>Email:</label>
+        <label className={styles.Form_container_label}>Email:</label>
         <input
           type='email'
           name='email'
-          className={styles.ProveedoresForm__container__input}
+          value={proveedores.email}
+          className={styles.Form__container__input}
           placeholder='correo@email.com'
           onChange={handleChange}
         />
 
-        <label className={styles.ProveedoresForm_container_label}>
+        <label className={styles.Form_container_label}>
           Dirección:
         </label>
         <input
           type='text'
           name='address'
-          className={styles.ProveedoresForm__container__input}
+          value={proveedores.address}
+          className={styles.Form__container__input}
           placeholder='calle 123 # 123'
           onChange={handleChange}
           required
         />
 
-        <label className={styles.ProveedoresForm_container_label}>
+        <label className={styles.Form_container_label}>
           Teléfono:
         </label>
         <input
           type='number'
           name='phone'
-          className={styles.ProveedoresForm__container__input}
+          value={proveedores.phone}
+          className={styles.Form__container__input}
           placeholder='Teléfono'
           onChange={handleChange}
           maxLength={10}

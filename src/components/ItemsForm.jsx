@@ -64,7 +64,7 @@ export default function ClientsForm() {
         <input
           type='text'
           name='itemCode'
-          value={productos.itemcode}
+          value={productos.itemCode}
           className={styles.Form__container__input}
           placeholder='ingresa el codigo del producto'
           onChange={handleChange}

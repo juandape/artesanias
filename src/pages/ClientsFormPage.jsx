@@ -3,9 +3,7 @@ import ClientsForm from '@/components/ClientsForm';
 function ClientsFormPage() {
 
   return (
-    <>
       <ClientsForm />
-    </>
   );
 }
 

@@ -2,9 +2,7 @@ import ClientsList from '@components/ClientsList'
 
 function ClientsListPage() {
   return (
-    <>
       <ClientsList />
-    </>
   );
 }
 

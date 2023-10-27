@@ -40,11 +40,13 @@ export default function OrdersList() {
   }, []);
 
   //handle row edits
-  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+  const handleSaveRowEdits = async ({ exitEditingMode, row, values, cell }) => {
     if (!Object.keys(validationErrors).length) {
       const id = values._id;
       const url = `${BASE_URL}/api/orders/${id}`;
       // data[row.index] = values;
+      data[cell.row.index][cell.column.id] = values;
+      setData([...data]);
 
       try {
         const res = await axios.patch(url, values);
@@ -52,7 +54,7 @@ export default function OrdersList() {
         setData((prevData) => {
           prevData.map((item, index) => {
             if (index === row.index) {
-              return values
+              return values;
             }
             return item;
           });
@@ -184,10 +186,10 @@ export default function OrdersList() {
     return items.filter((item) => itemIds.includes(item._id));
   };
 
-  const handleSaveCell = (cell, value) => {
-    data[cell.row.index][cell.column.id] = value;
-    setData([...data]);
-  };
+  // const handleSaveCell = (cell, value) => {
+  //   data[cell.row.index][cell.column.id] = value;
+  //   setData([...data]);
+  // };
 
   const columns = useMemo(
     () => [
@@ -274,11 +276,11 @@ export default function OrdersList() {
       {
         accessorKey: 'status',
         header: 'Estado',
-        Edit: ({ cell, value }) => {
+        Edit: ({ cell, values }) => {
           return (
             <StatusSelect
-              value={value}
-              onChange={(e)=> handleSaveCell(cell, e.target.value)}
+              value={values}
+              onChange={(e) => handleSaveRowEdits(cell, e.target.values)}
             />
           );
         },

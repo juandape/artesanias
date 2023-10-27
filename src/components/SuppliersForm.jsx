@@ -1,51 +1,57 @@
-import style from '../styles/SuppliersForm.module.css';
+import styles from '../styles/SuppliersForm.module.css';
 
 export default function SuppliersForm() {
   return (
-    <div>
-      <h1 className={style.ProveedoresForm__title}>Formulario Proveedores</h1>
-      <form className={style.ProveedoresForm__container}>
-        <label>
+    <div className={styles.container}>
+       <a href='/' className={styles.back}>
+        ←
+      </a>
+      <h1 className={styles.ProveedoresForm__title}>Formulario Proveedores</h1>
+      <form className={styles.ProveedoresForm__container}>
+        <label className={styles.ProveedoresForm_container_label}>
           Nombre Proveedor:
-          <input
-            type='text'
-            name='name'
-            className={style.ProveedoresForm__container__input}
-          />
         </label>
-        <label>
-          NIT:
-          <input
-            type='number'
-            name='nit'
-            className={style.ProveedoresForm__container__input}
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type='email'
-            name='email'
-            className={style.ProveedoresForm__container__input}
-          />
-        </label>
-        <label>
+        <input
+          type='text'
+          name='name'
+          className={styles.ProveedoresForm__container__input}
+        />
+
+        <label className={styles.ProveedoresForm_container_label}>NIT:</label>
+        <input
+          type='number'
+          name='nit'
+          className={styles.ProveedoresForm__container__input}
+        />
+
+        <label className={styles.ProveedoresForm_container_label}>Email:</label>
+        <input
+          type='email'
+          name='email'
+          className={styles.ProveedoresForm__container__input}
+        />
+
+        <label className={styles.ProveedoresForm_container_label}>
           Dirección:
-          <input
-            type='text'
-            name='address'
-            className={style.ProveedoresForm__container__input}
-          />
         </label>
-        <label>
+        <input
+          type='text'
+          name='address'
+          className={styles.ProveedoresForm__container__input}
+        />
+
+        <label className={styles.ProveedoresForm_container_label}>
           Teléfono:
-          <input
-            type='number'
-            name='phone'
-            className={style.ProveedoresForm__container__input}
-          />
         </label>
-        <button type='submit'>Enviar</button>
+        <input
+          type='number'
+          name='phone'
+          className={styles.ProveedoresForm__container__input}
+        />
+
+        <button type='submit' className={styles.button}>
+          Enviar
+        </button>
       </form>
     </div>
   );

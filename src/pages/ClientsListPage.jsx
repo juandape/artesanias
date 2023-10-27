@@ -1,9 +1,5 @@
-import ClientsList from '@components/ClientsList'
+import ClientsList from '@components/ClientsList';
 
-function ClientsListPage() {
-  return (
-      <ClientsList />
-  );
+export default function ClientsListPage() {
+  return <ClientsList />;
 }
-
-export default ClientsListPage;

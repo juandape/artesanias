@@ -46,6 +46,11 @@
   list-style: none;
 }
 
+.dashboard__sectionBox__div{
+  display: flex;
+  gap: 10px;
+}
+
 .dashboard__sectionBox__listItem {
   border-radius: 15px;
   border: 2px solid black;
@@ -59,8 +64,22 @@
   color: purple;
   font-weight: bold;
 }
+.dashboard__sectionBox__listItem__bodega{
+  border-radius: 15px;
+  border: 2px solid black;
+  padding: 15px;
+  width: 150px;
+  background-color: #f8fbfb;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 18px;
+  color: purple;
+  font-weight: bold;
+}
 
-.dashboard__sectionBox__listItem:hover {
+.dashboard__sectionBox__listItem:hover,
+.dashboard__sectionBox__listItem__bodega:hover{
   font-size: 20px;
   background-color: rgb(176, 174, 176);
   cursor: pointer;

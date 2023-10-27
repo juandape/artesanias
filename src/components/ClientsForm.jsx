@@ -73,7 +73,7 @@ export default function ClientsForm() {
           required
         />
 
-        <label className={styles.ClientsForm_container_label}>Email:</label>
+        <label className={styles.Form_container_label}>Email:</label>
         <input
           type='email'
           name='email'
@@ -84,7 +84,7 @@ export default function ClientsForm() {
           onChange={handleChange}
         />
 
-        <label className={styles.ClientsForm_container_label}>Teléfono:</label>
+        <label className={styles.Form_container_label}>Teléfono:</label>
         <input
           type='number'
           name='phone'
@@ -96,7 +96,7 @@ export default function ClientsForm() {
           required
         />
 
-        <label className={styles.ClientsForm_container_label}>Dirección:</label>
+        <label className={styles.Form_container_label}>Dirección:</label>
         <input
           type='text'
           name='address'
@@ -107,7 +107,7 @@ export default function ClientsForm() {
           required
         />
 
-        <label className={styles.ClientsForm_container_label}>Barrio:</label>
+        <label className={styles.Form_container_label}>Barrio:</label>
         <input
           type='text'
           name='neighborhood'
@@ -118,7 +118,7 @@ export default function ClientsForm() {
           required
         />
 
-        <label className={styles.ClientsForm_container_label}>Ciudad:</label>
+        <label className={styles.Form_container_label}>Ciudad:</label>
         <input
           type='text'
           name='city'
@@ -129,7 +129,7 @@ export default function ClientsForm() {
           required
         />
 
-        <label className={styles.ClientsForm_container_label}>Instagram:</label>
+        <label className={styles.Form_container_label}>Instagram:</label>
         <input
           type='text'
           name='instagram'

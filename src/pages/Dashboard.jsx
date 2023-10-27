@@ -94,12 +94,26 @@ const Dashboard = () => {
           </h2>
           {selected === 'bodega' && menuOpen && (
             <ul className={styles.dashboard__sectionBox__list}>
-              <li className={styles.dashboard__sectionBox__listItem}>
-                Insumos
-              </li>
-              <li className={styles.dashboard__sectionBox__listItem}>
-                Articulos
-              </li>
+              <div className={styles.dashboard__sectionBox__div}>
+                <Link href={'/ItemsFormPage'}>
+                  <li
+                    className={styles.dashboard__sectionBox__listItem__bodega}
+                  >
+                    Nuevo Producto
+                  </li>
+                </Link>
+                <li className={styles.dashboard__sectionBox__listItem__bodega}>
+                  Ver Lista de Productos
+                </li>
+              </div>
+              <div className={styles.dashboard__sectionBox__div}>
+                <li className={styles.dashboard__sectionBox__listItem__bodega}>
+                  Nuevo Insumo
+                </li>
+                <li className={styles.dashboard__sectionBox__listItem__bodega}>
+                  Ver Lista de Insumos
+                </li>
+              </div>
             </ul>
           )}
         </div>

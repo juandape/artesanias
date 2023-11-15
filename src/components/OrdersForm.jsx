@@ -259,7 +259,7 @@ export default function OrdersForm() {
           <option value='pendiente'>Pendiente</option>
           <option value='asignado'>Inventario asignado</option>
           <option value='pendientedecobro'>
-            Despachado pendiente de cobro
+            Despachado y pendiente de cobro
           </option>
           <option value='pagado'>Despachado y cancelado</option>
         </select>

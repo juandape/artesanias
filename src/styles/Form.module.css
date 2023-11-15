@@ -26,6 +26,9 @@
 }
 
 .Form__container__input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border-radius: 15px;
   border-color: purple;
   padding: 15px;

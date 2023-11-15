@@ -252,30 +252,44 @@ export default function OrdersList() {
     table.setEditingRow(null);
   };
 
-  const handleDelete = async ({ values, table }) => {
-    const id = values._id;
-    const url = `${BASE_URL}/api/orders/${id}`;
-    try {
-      const res = await axios.delete(url);
-      console.log(res);
-      Swal.fire({
-        icon: 'success',
-        title: 'Orden eliminada con éxito',
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.log(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Algo salió mal, por favor intente de nuevo',
-        footer: `${error}`,
-      });
-      return;
-    }
-    table.setEditingRow(null);
-  };
+  const handleDelete = async (row) => {
+    console.log(row);
+    Swal.fire({
+      title: '¿Estás seguro de que deseas eliminar esta linea?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const id = row.getValue('_id');
+        const url = `${BASE_URL}/api/orders/${id}`;
+        try {
+          const res = await axios.delete(url);
+          console.log(res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Orden eliminada con éxito',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          router.reload();
+        } catch (error) {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo salió mal, por favor intente de nuevo',
+            footer: `${error}`,
+          });
+          return;
+        }
+        setData([...data]);
+      }
+    });
+  }
 
   const table = useMaterialReactTable({
     columns,
@@ -293,7 +307,6 @@ export default function OrdersList() {
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onEditingRowSave: handleEdit,
-    onEditingRowDelete: handleDelete,
     onEditingRowCancel: () => {},
     renderRowActions: ({ row, table }) => (
       <Box sx={{ display: 'flex', gap: '1rem' }}>
@@ -303,7 +316,7 @@ export default function OrdersList() {
           </IconButton>
         </Tooltip>
         <Tooltip arrow placement='right' title='Delete'>
-          <IconButton color='error' onClick={() => table.setEditingRow(row)}>
+          <IconButton color='error' onClick={() => handleDelete(row)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

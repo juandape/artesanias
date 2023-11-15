@@ -215,7 +215,7 @@ export default function OrdersForm() {
           name='unitPrice'
           className={styles.Form__container__input}
           placeholder='Valor unitario del producto'
-          value={valorUnitario || orders.unitPrice}
+          value={valorUnitario.toLocaleString() || orders.unitPrice.toLocaleString()}
           onChange={handleChange}
         />
 
@@ -240,10 +240,14 @@ export default function OrdersForm() {
           name='totalPrice'
           className={styles.Form__container__input}
           placeholder='Valor total'
-          value={orders.totalPrice}
+          value={Number(orders.totalPrice).toLocaleString()}
           onChange={handleChange}
           readOnly
         />
+
+<div>
+        <p>Shipment: {Number(orders.shipment).toLocaleString()}</p>
+      </div>
 
         <label className={styles.Form_container_label}>Estado:</label>
         <select

@@ -6,6 +6,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function Summary() {
   const [orders, setOrders] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState('');
+  const [selectedYear, setSelectedYear] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,26 @@ export default function Summary() {
       .reduce((acc, order) => acc + order.totalPrice, 0);
     return total.toLocaleString({ style: 'currency', currency: 'COP' });
   };
+
+  const calculateTotalByMonth = (month, year, status) => {
+    const total = orders
+      .filter(
+        (order) =>
+          order.status === status &&
+          new Date(order.deliveryDate).toLocaleString('default', { month: 'long' }).toLowerCase() === month.toLowerCase() &&
+          new Date(order.deliveryDate).getFullYear().toString() === year
+      )
+      .reduce((acc, order) => acc + order.totalPrice, 0);
+    return total.toLocaleString({ style: 'currency', currency: 'COP' });
+  };
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.target.value);
+  };
+
+  const handleYearChange = (e) => {
+    setSelectedYear(e.target.value);
+  }
 
   return (
     <>
@@ -49,14 +71,38 @@ export default function Summary() {
           </div>
         </div>
         <div>
-          <h3>Despachado y cancelado por mes</h3>
-          <select name='' id=''>
-            <option value='' disabled hidden>
+        <h3>Despachado y cancelado por mes y año</h3>
+          <select name='month' value={selectedMonth} onChange={handleMonthChange}>
+            <option value='' disabled>
               Seleccione un mes
             </option>
-            <option value=''>enero</option>
-            <option value=''>febrero</option>
+            <option value='enero'>enero</option>
+            <option value='febrero'>febrero</option>
+            <option value='marzo'>marzo</option>
+            <option value='abril'>abril</option>
+            <option value='mayo'>mayo</option>
+            <option value='junio'>junio</option>
+            <option value='julio'>julio</option>
+            <option value='agosto'>agosto</option>
+            <option value='septiembre'>septiembre</option>
+            <option value='octubre'>octubre</option>
+            <option value='noviembre'>noviembre</option>
+            <option value='diciembre'>diciembre</option>
           </select>
+          <select name='year' value={selectedYear} onChange={handleYearChange}>
+            <option value='' disabled>
+              Seleccione un año
+            </option>
+            <option value='2022'>2022</option>
+            <option value='2023'>2023</option>
+            <option value='2024'>2024</option>
+
+          </select>
+          {selectedMonth && selectedYear && (
+            <div>
+              <div>$ {calculateTotalByMonth(selectedMonth, selectedYear, 'Despachado y cancelado')}</div>
+            </div>
+          )}
         </div>
       </div>
     </>

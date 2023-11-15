@@ -245,10 +245,6 @@ export default function OrdersForm() {
           readOnly
         />
 
-<div>
-        <p>Shipment: {Number(orders.shipment).toLocaleString()}</p>
-      </div>
-
         <label className={styles.Form_container_label}>Estado:</label>
         <select
           name='status'

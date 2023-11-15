@@ -71,7 +71,7 @@ export default function Summary() {
           </div>
         </div>
         <div>
-        <h3>Despachado y cancelado por mes y año</h3>
+        <h3>Despachado y cancelado por mes</h3>
           <select name='month' value={selectedMonth} onChange={handleMonthChange}>
             <option value='' disabled>
               Seleccione un mes
@@ -93,10 +93,10 @@ export default function Summary() {
             <option value='' disabled>
               Seleccione un año
             </option>
-            <option value='2022'>2022</option>
             <option value='2023'>2023</option>
             <option value='2024'>2024</option>
-
+            <option value='2025'>2025</option>
+            <option value='2026'>2026</option>
           </select>
           {selectedMonth && selectedYear && (
             <div>

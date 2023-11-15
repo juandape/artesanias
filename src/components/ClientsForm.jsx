@@ -43,7 +43,7 @@ export default function ClientsForm() {
       showConfirmButton: false,
       timer: 1500,
     });
-    router.push('/ClientListPage');
+    router.push('/ClientsListPage');
   };
 
   const handleChange = (e) => {

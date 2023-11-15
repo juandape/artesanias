@@ -34,7 +34,9 @@ export default function Summary() {
       .filter(
         (order) =>
           order.status === status &&
-          new Date(order.deliveryDate).toLocaleString('default', { month: 'long' }).toLowerCase() === month.toLowerCase() &&
+          new Date(order.deliveryDate)
+            .toLocaleString('default', { month: 'long' })
+            .toLowerCase() === month.toLowerCase() &&
           new Date(order.deliveryDate).getFullYear().toString() === year
       )
       .reduce((acc, order) => acc + order.totalPrice, 0);
@@ -47,7 +49,7 @@ export default function Summary() {
 
   const handleYearChange = (e) => {
     setSelectedYear(e.target.value);
-  }
+  };
 
   return (
     <>
@@ -58,8 +60,8 @@ export default function Summary() {
         </a>
         <h1 className={styles.title}>Resumen</h1>
         <div>
-          <div>
-            <h2>Clientes</h2>
+          <div className={styles.valueContainer}>
+            <div className={styles.subtitle}>Clientes</div>
             <div>Pendiente</div>
             <div>$ {calculateTotal('Pendiente')}</div>
             <div>Inventario Asignado</div>
@@ -70,28 +72,38 @@ export default function Summary() {
             <div>$ {calculateTotal('Despachado y cancelado')}</div>
           </div>
         </div>
-        <div>
-        <h3>Despachado y cancelado por mes</h3>
-          <select name='month' value={selectedMonth} onChange={handleMonthChange}>
+        <div className={styles.valueContainer}>
+          <div className={styles.subtitle}>Despachado y cancelado por mes</div>
+          <select
+            name='month'
+            value={selectedMonth}
+            onChange={handleMonthChange}
+            className={styles.select}
+          >
             <option value='' disabled>
-              Seleccione un mes
+              Seleccione mes
             </option>
-            <option value='enero'>enero</option>
-            <option value='febrero'>febrero</option>
-            <option value='marzo'>marzo</option>
-            <option value='abril'>abril</option>
-            <option value='mayo'>mayo</option>
-            <option value='junio'>junio</option>
-            <option value='julio'>julio</option>
-            <option value='agosto'>agosto</option>
-            <option value='septiembre'>septiembre</option>
-            <option value='octubre'>octubre</option>
-            <option value='noviembre'>noviembre</option>
-            <option value='diciembre'>diciembre</option>
+            <option value='enero'>Enero</option>
+            <option value='febrero'>Febrero</option>
+            <option value='marzo'>Marzo</option>
+            <option value='abril'>Abril</option>
+            <option value='mayo'>Mayo</option>
+            <option value='junio'>Junio</option>
+            <option value='julio'>Julio</option>
+            <option value='agosto'>Agosto</option>
+            <option value='septiembre'>Septiembre</option>
+            <option value='octubre'>Octubre</option>
+            <option value='noviembre'>Noviembre</option>
+            <option value='diciembre'>Diciembre</option>
           </select>
-          <select name='year' value={selectedYear} onChange={handleYearChange}>
+          <select
+            name='year'
+            value={selectedYear}
+            onChange={handleYearChange}
+            className={styles.select}
+          >
             <option value='' disabled>
-              Seleccione un año
+              Seleccione año
             </option>
             <option value='2023'>2023</option>
             <option value='2024'>2024</option>
@@ -100,7 +112,17 @@ export default function Summary() {
           </select>
           {selectedMonth && selectedYear && (
             <div>
-              <div>$ {calculateTotalByMonth(selectedMonth, selectedYear, 'Despachado y cancelado')}</div>
+              <div className={styles.value}>
+                {' '}
+                <strong>
+                  -&gt; ${' '}
+                  {calculateTotalByMonth(
+                    selectedMonth,
+                    selectedYear,
+                    'Despachado y cancelado'
+                  )}
+                </strong>{' '}
+              </div>
             </div>
           )}
         </div>

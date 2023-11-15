@@ -29,7 +29,7 @@ export default function Summary() {
 
   return (
     <>
-      <h1>PAGE ON CONSTRUCTION</h1>
+      <h1>PAGE UNDER CONSTRUCTION</h1>
       <div className={styles.container}>
         <a href='/' className={styles.back}>
           ←

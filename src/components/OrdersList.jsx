@@ -103,6 +103,7 @@ export default function OrdersList() {
       {
         accessorKey: 'line',
         header: 'Linea',
+        enableEditing: false,
       },
       {
         accessorKey: 'client',
@@ -130,6 +131,7 @@ export default function OrdersList() {
       {
         accessorKey: 'quantity',
         header: 'Cantidad',
+        enableEditing: false,
         muiEditTextFieldProps: {
           type: 'number',
           required: false,

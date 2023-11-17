@@ -291,7 +291,7 @@ export default function OrdersList() {
         setData([...data]);
       }
     });
-  }
+  };
 
   const table = useMaterialReactTable({
     columns,

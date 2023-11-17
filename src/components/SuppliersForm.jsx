@@ -42,25 +42,23 @@ export default function SuppliersForm() {
       timer: 1500,
     });
     router.push('/SuppliersListPage');
-  }
+  };
 
   const handleChange = (e) => {
     setProveedores({
       ...proveedores,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   return (
     <div className={styles.container}>
-       <a href='/' className={styles.back}>
+      <a href='/' className={styles.back}>
         ←
       </a>
       <h1 className={styles.Form__title}>Formulario Proveedores</h1>
       <form className={styles.Form__container} onSubmit={handleSubmit}>
-        <label className={styles.Form_container_label}>
-          Nombre Proveedor:
-        </label>
+        <label className={styles.Form_container_label}>Nombre Proveedor:</label>
         <input
           type='text'
           name='name'
@@ -92,9 +90,7 @@ export default function SuppliersForm() {
           onChange={handleChange}
         />
 
-        <label className={styles.Form_container_label}>
-          Dirección:
-        </label>
+        <label className={styles.Form_container_label}>Dirección:</label>
         <input
           type='text'
           name='address'
@@ -105,9 +101,7 @@ export default function SuppliersForm() {
           required
         />
 
-        <label className={styles.Form_container_label}>
-          Teléfono:
-        </label>
+        <label className={styles.Form_container_label}>Teléfono:</label>
         <input
           type='number'
           name='phone'

@@ -118,7 +118,6 @@ export default function OrdersForm() {
     }
   };
 
-
   return (
     <div className={styles.container}>
       <a href='/' className={styles.back}>
@@ -126,9 +125,7 @@ export default function OrdersForm() {
       </a>
       <h1 className={styles.Form__title}>Pedidos</h1>
       <form className={styles.Form__container} onSubmit={handleSubmit}>
-        <label className={styles.Form_container_label}>
-          Fecha Solicitud:
-        </label>
+        <label className={styles.Form_container_label}>Fecha Solicitud:</label>
         <input
           type='date'
           name='orderDate'
@@ -207,21 +204,19 @@ export default function OrdersForm() {
           required
         />
 
-        <label className={styles.Form_container_label}>
-          Valor Unitario:
-        </label>
+        <label className={styles.Form_container_label}>Valor Unitario:</label>
         <input
           type='number'
           name='unitPrice'
           className={styles.Form__container__input}
           placeholder='Valor unitario del producto'
-          value={valorUnitario.toLocaleString() || orders.unitPrice.toLocaleString()}
+          value={
+            valorUnitario.toLocaleString() || orders.unitPrice.toLocaleString()
+          }
           onChange={handleChange}
         />
 
-        <label className={styles.Form_container_label}>
-          Valor Envio:
-        </label>
+        <label className={styles.Form_container_label}>Valor Envio:</label>
         <input
           type='number'
           name='shipment'
@@ -232,9 +227,7 @@ export default function OrdersForm() {
           required
         />
 
-        <label className={styles.Form_container_label}>
-          Valor Total:
-        </label>
+        <label className={styles.Form_container_label}>Valor Total:</label>
         <input
           type='number'
           name='totalPrice'

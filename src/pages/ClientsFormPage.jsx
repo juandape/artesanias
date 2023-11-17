@@ -1,10 +1,7 @@
 import ClientsForm from '@/components/ClientsForm';
 
 function ClientsFormPage() {
-
-  return (
-      <ClientsForm />
-  );
+  return <ClientsForm />;
 }
 
 export default ClientsFormPage;

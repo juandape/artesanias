@@ -190,7 +190,7 @@ export default function itemsList() {
         Cell: ({ row }) => {
           const unitCost = row.original.unitCost;
           return <span>${unitCost.toLocaleString()}</span>;
-        }
+        },
       },
       {
         accessorKey: 'unitPrice',
@@ -198,7 +198,7 @@ export default function itemsList() {
         Cell: ({ row }) => {
           const unitPrice = row.original.unitPrice;
           return <span>${unitPrice.toLocaleString()}</span>;
-        }
+        },
       },
       {
         accessorKey: 'marginPerHour',
@@ -208,7 +208,12 @@ export default function itemsList() {
           const unitPrice = row.original.unitPrice;
           const realMinUn = row.original.realMinUn;
           const estimatedMinUn = row.original.estimatedMinUn;
-          const marginPerHour = calculateMarginPerHour(unitCost, unitPrice, realMinUn, estimatedMinUn);
+          const marginPerHour = calculateMarginPerHour(
+            unitCost,
+            unitPrice,
+            realMinUn,
+            estimatedMinUn
+          );
           return <span>${marginPerHour.toLocaleString()}</span>;
         },
         enableEditing: false,
@@ -235,7 +240,7 @@ export default function itemsList() {
 
   const handleExport = () => {
     csvExporter.generateCsv(data);
-  }
+  };
 
   return (
     <>

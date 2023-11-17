@@ -129,11 +129,11 @@ const Dashboard = () => {
             </ul>
           )}
         </div>
-          <div className={styles.dashboard__sectionBox}>
-        <Link href={'SummaryPage'}>
+        <div className={styles.dashboard__sectionBox}>
+          <Link href={'SummaryPage'}>
             <h2 className={styles.dashboard__sectionBox__listTitle}>Resumen</h2>
-        </Link>
-          </div>
+          </Link>
+        </div>
       </div>
     </>
   );

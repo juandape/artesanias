@@ -214,7 +214,7 @@ export default function ClientsList() {
           editingMode='modal' // Default
           enableColumnOrdering
           enableEditing
-          initialState={{columnVisibility: { _id: false }}}
+          initialState={{ columnVisibility: { _id: false } }}
           onEditingRowSave={handleSaveRowEdits}
           onEditingRowCancel={handleCancelRowEdits}
           renderRowActions={({ row, table }) => (

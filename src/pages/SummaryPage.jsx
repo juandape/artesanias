@@ -1,9 +1,7 @@
 import Summary from '@/components/Summary';
 
 function SummaryPage() {
-  return (
-      <Summary />
-  );
+  return <Summary />;
 }
 
 export default SummaryPage;

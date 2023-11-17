@@ -39,14 +39,14 @@
 .dashboard__sectionBox__listTitle:hover {
   cursor: pointer;
   transition: 0.5s ease-in-out;
-  color: gray
+  color: gray;
 }
 
 .dashboard__sectionBox__list {
   list-style: none;
 }
 
-.dashboard__sectionBox__div{
+.dashboard__sectionBox__div {
   display: flex;
   gap: 10px;
 }
@@ -64,7 +64,7 @@
   color: purple;
   font-weight: bold;
 }
-.dashboard__sectionBox__listItem__bodega{
+.dashboard__sectionBox__listItem__bodega {
   border-radius: 15px;
   border: 2px solid black;
   padding: 15px;
@@ -79,7 +79,7 @@
 }
 
 .dashboard__sectionBox__listItem:hover,
-.dashboard__sectionBox__listItem__bodega:hover{
+.dashboard__sectionBox__listItem__bodega:hover {
   font-size: 20px;
   background-color: rgb(176, 174, 176);
   cursor: pointer;

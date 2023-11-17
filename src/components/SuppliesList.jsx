@@ -33,7 +33,6 @@ export default function ClientsList() {
     fetchData();
   }, []);
 
-
   //handle row edits
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
@@ -239,7 +238,7 @@ export default function ClientsList() {
           editingMode='modal' // Default
           enableColumnOrdering
           enableEditing
-          initialState={{columnVisibility: { _id: false }}}
+          initialState={{ columnVisibility: { _id: false } }}
           onEditingRowSave={handleSaveRowEdits}
           onEditingRowCancel={handleCancelRowEdits}
           renderRowActions={({ row, table }) => (

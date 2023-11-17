@@ -1,9 +1,7 @@
 import SuppliersForm from '@/components/SuppliersForm';
 
 function SuppliersFormPage() {
-  return (
-      <SuppliersForm />
-  );
+  return <SuppliersForm />;
 }
 
 export default SuppliersFormPage;

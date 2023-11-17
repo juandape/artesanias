@@ -60,9 +60,7 @@ export default function ClientsForm() {
       </a>
       <h1 className={styles.Form__title}>Formulario Clientes</h1>
       <form className={styles.Form__container} onSubmit={handleSubmit}>
-        <label className={styles.Form_container_label}>
-          Nombre Cliente:
-        </label>
+        <label className={styles.Form_container_label}>Nombre Cliente:</label>
         <input
           type='text'
           name='name'

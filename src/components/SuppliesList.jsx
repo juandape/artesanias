@@ -9,7 +9,7 @@ import styles from '@styles/List.module.css';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function ClientsList() {
+export default function SuppliesList() {
   const router = useRouter();
   //data and fetching state
   const [data, setData] = useState([]);
@@ -184,6 +184,7 @@ export default function ClientsList() {
         },
         enableEditing: false,
       },
+
       {
         accessorKey: 'supplieCode',
         header: 'Código',

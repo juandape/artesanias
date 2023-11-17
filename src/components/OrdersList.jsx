@@ -6,7 +6,7 @@ import {
 } from 'material-react-table';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Box, Button, IconButton, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import styles from '@styles/List.module.css';

@@ -22,8 +22,6 @@ export default function OrdersList() {
   const [rowCount, setRowCount] = useState(0);
 
   //table state
-  const [columnFilters, setColumnFilters] = useState([]);
-  const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
@@ -62,8 +60,6 @@ export default function OrdersList() {
         `${pagination.pageIndex * pagination.pageSize}`
       );
       url.searchParams.set('size', `${pagination.pageSize}`);
-      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
       try {
@@ -81,8 +77,6 @@ export default function OrdersList() {
     };
     fetchData();
   }, [
-    columnFilters,
-    globalFilter,
     pagination.pageIndex,
     pagination.pageSize,
     sorting,

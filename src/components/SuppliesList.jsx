@@ -156,6 +156,9 @@ export default function SuppliesList() {
         header: 'Nombre Proveedor',
         enableEditing: false,
         Cell: ({ row }) => {
+          if (suppliers.length === 0) {
+            return 'Cargando...';
+          }
           const supplier = suppliers.find(
             (supplier) => supplier._id === row.getValue('supplierName')
           );
@@ -192,7 +195,7 @@ export default function SuppliesList() {
         header: 'Cantidad',
       },
     ],
-    []
+    [suppliers]
   );
 
   const table = useMaterialReactTable({

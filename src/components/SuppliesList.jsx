@@ -41,6 +41,7 @@ export default function SuppliesList() {
   });
 
   const [suppliers, setSuppliers] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -260,7 +261,7 @@ export default function SuppliesList() {
         {' '}
         ←{' '}
       </a>
-      <h1 className={styles.ListTitle}>Lista de Pedidos</h1>
+      <h1 className={styles.ListTitle}>Lista de Insumos</h1>
       <div>
         <MaterialReactTable table={table} />
       </div>

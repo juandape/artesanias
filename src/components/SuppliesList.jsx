@@ -156,9 +156,7 @@ export default function SuppliesList() {
         header: 'Nombre Proveedor',
         enableEditing: false,
         Cell: ({ row }) => {
-          if (suppliers.length === 0) {
-            return 'Cargando...';
-          }
+          if (suppliers.length === 0) return 'Cargando...';
           const supplier = suppliers.find(
             (supplier) => supplier._id === row.getValue('supplierName')
           );

@@ -100,6 +100,7 @@ export default function OrdersList() {
         accessorKey: 'client',
         header: 'Nombre Cliente',
         Cell: ({ row }) => {
+          if (clients.length === 0) return 'Cargando...';
           const client = clients.find(
             (client) => client._id === row.getValue('client')
           );

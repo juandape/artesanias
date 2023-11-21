@@ -3,11 +3,7 @@ import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
-import {
-  Box,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -76,11 +72,7 @@ export default function SuppliesList() {
       setIsRefetching(false);
     };
     fetchData();
-  }, [
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
-  ]);
+  }, [pagination.pageIndex, pagination.pageSize, sorting]);
 
   const handleEdit = async ({ exitEditingMode, row, values }) => {
     const id = values._id;

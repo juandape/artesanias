@@ -30,6 +30,7 @@ export default function OrdersList() {
 
   const [clients, setClients] = useState([]);
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,11 +77,7 @@ export default function OrdersList() {
       setIsRefetching(false);
     };
     fetchData();
-  }, [
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
-  ]);
+  }, [pagination.pageIndex, pagination.pageSize, sorting]);
 
   const filterItemsById = (itemIds) => {
     return items.filter((item) => itemIds.includes(item._id));

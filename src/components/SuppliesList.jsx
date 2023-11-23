@@ -201,6 +201,7 @@ export default function SuppliesList() {
     data,
     editDisplayMode: 'modal', // ('modal', 'cell', 'table', and 'custom' are also available)
     enableEditing: true,
+    enableStickyHeader: true,
     getRowId: (row) => row._id,
     muiToolbarAlertBannerProps: isError
       ? {

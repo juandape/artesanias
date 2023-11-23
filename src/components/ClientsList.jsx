@@ -211,6 +211,7 @@ export default function ClientsList() {
           editingMode='modal' // Default
           enableColumnOrdering
           enableEditing
+          enableStickyHeader
           initialState={{ columnVisibility: { _id: false } }}
           onEditingRowSave={handleSaveRowEdits}
           onEditingRowCancel={handleCancelRowEdits}

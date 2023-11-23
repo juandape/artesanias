@@ -290,6 +290,7 @@ export default function OrdersList() {
     data,
     editDisplayMode: 'row', // ('modal', 'cell', 'table', and 'custom' are also available)
     enableEditing: true,
+    enableStickyHeader: true,
     getRowId: (row) => row._id,
     muiToolbarAlertBannerProps: isError
       ? {
@@ -328,9 +329,7 @@ export default function OrdersList() {
   return (
     <div>
       <HeaderTitle title='Lista de Pedidos' />
-      <div>
-        <MaterialReactTable table={table} />
-      </div>
+      <MaterialReactTable table={table} />
     </div>
   );
 }

@@ -260,6 +260,7 @@ export default function itemsList() {
           editingMode='modal'
           enableColumnOrdering
           enableEditing
+          enableStickyHeader
           initialState={{ columnVisibility: { _id: false } }}
           onEditingRowSave={handleSaveRowEdits}
           onEditingRowCancel={handleCancelRowEdits}

@@ -167,7 +167,6 @@ export default function SuppliesForm() {
           className={styles.Form__container__input}
           placeholder='Ingresa la cantidad'
           onChange={handleChange}
-          required
         />
 
         <button type='submit' className={styles.button}>

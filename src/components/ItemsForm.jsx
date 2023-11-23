@@ -17,6 +17,7 @@ const initialFormState = {
   unitPrice: '',
   weight: '',
   estimatedMinUn: '',
+  realMinUn: '',
   quantity: '',
 };
 
@@ -126,6 +127,15 @@ export default function ClientsForm() {
           onChange={handleChange}
           required
         />
+        <label className={styles.Form_container_label}>Min/un real:</label>
+        <input
+          type='number'
+          name='realMinUn'
+          value={productos.realMinUn}
+          placeholder='ingresa el min/un real'
+          className={styles.Form__container__input}
+          onChange={handleChange}
+        />
 
         <label className={styles.Form_container_label}>Peso (grs):</label>
         <input
@@ -136,6 +146,16 @@ export default function ClientsForm() {
           className={styles.Form__container__input}
           onChange={handleChange}
           required
+        />
+
+<label className={styles.Form_container_label}>Cantidad:</label>
+        <input
+          type='number'
+          name='quantity'
+          value={productos.quantity}
+          placeholder='ingresa la cantidad del producto'
+          className={styles.Form__container__input}
+          onChange={handleChange}
         />
 
         <button type='submit' className={styles.button}>

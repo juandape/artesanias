@@ -120,10 +120,10 @@ export default function OrdersForm() {
 
   return (
     <div className={styles.container}>
-      <a href='/' className={styles.back}>
-        ←
-      </a>
-      <h1 className={styles.Form__title}>Pedidos</h1>
+        <a href='/' className={styles.back}>
+          ←
+        </a>
+        <h1 className={styles.Form__title}>Pedidos</h1>
       <form className={styles.Form__container} onSubmit={handleSubmit}>
         <label className={styles.Form_container_label}>Fecha Solicitud:</label>
         <input
@@ -249,12 +249,12 @@ export default function OrdersForm() {
           <option value='' disabled hidden>
             Seleccione una opción
           </option>
-          <option value='pendiente'>Pendiente</option>
-          <option value='asignado'>Inventario asignado</option>
-          <option value='pendientedecobro'>
+          <option value='Pendiente'>Pendiente</option>
+          <option value='Inventario asignado'>Inventario asignado</option>
+          <option value='Despachado y pendiente de cobro'>
             Despachado y pendiente de cobro
           </option>
-          <option value='pagado'>Despachado y cancelado</option>
+          <option value='Despachado y cancelado'>Despachado y cancelado</option>
         </select>
 
         <button type='submit' className={styles.button}>

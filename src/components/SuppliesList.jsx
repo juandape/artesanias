@@ -9,7 +9,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import styles from '@styles/List.module.css';
+import HeaderTitle from '@components/HeaderTitle';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -238,11 +238,7 @@ export default function SuppliesList() {
 
   return (
     <>
-      <a href='/' className={styles.back}>
-        {' '}
-        ←{' '}
-      </a>
-      <h1 className={styles.ListTitle}>Lista de Insumos</h1>
+      <HeaderTitle title='Lista de Insumos' />
       <div>
         <MaterialReactTable table={table} />
       </div>

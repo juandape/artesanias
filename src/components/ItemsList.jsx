@@ -5,7 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import styles from '@styles/List.module.css';
+import HeaderTitle from '@components/HeaderTitle';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -244,11 +244,7 @@ export default function itemsList() {
 
   return (
     <>
-      <a href='/' className={styles.back}>
-        {' '}
-        ←{' '}
-      </a>
-      <h1 className={styles.ListTitle}>Lista de Productos</h1>
+      <HeaderTitle title='Lista de Productos' />
       <div>
         <MaterialReactTable
           displayColumnDefOptions={{

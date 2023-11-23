@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import HeaderTitle from '@components/HeaderTitle';
 import styles from '@styles/List.module.css';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -194,11 +195,7 @@ export default function ClientsList() {
 
   return (
     <>
-      <a href='/' className={styles.back}>
-        {' '}
-        ←{' '}
-      </a>
-      <h1 className={styles.ListTitle}>Lista de Clientes</h1>
+      <HeaderTitle title='Lista de Clientes' />
       <div>
         <MaterialReactTable
           displayColumnDefOptions={{

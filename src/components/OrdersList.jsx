@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import styles from '@styles/List.module.css';
+import HeaderTitle from '@components/HeaderTitle';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -126,14 +126,14 @@ export default function OrdersList() {
         enableEditing: false,
         muiEditTextFieldProps: {
           type: 'number',
-          required: false,
+          required: true,
           onFocus: (e) => e.target.select(),
         },
       },
       {
         accessorKey: 'unitPrice',
         header: 'Precio Unitario',
-        enableEditing: false,
+        enableEditing: true,
         Cell: ({ row }) => {
           const unitPrice = row.getValue('unitPrice');
           return unitPrice.toLocaleString('es-CO', {
@@ -145,7 +145,7 @@ export default function OrdersList() {
       {
         accessorKey: 'shipment',
         header: 'Costo Envío',
-        enableEditing: false,
+        enableEditing: true,
         Cell: ({ row }) => {
           const shipment = row.getValue('shipment');
           return shipment.toLocaleString('es-CO', {
@@ -159,7 +159,7 @@ export default function OrdersList() {
         header: 'Precio Total',
         accessorKey: 'totalPrice',
         header: 'Precio Total',
-        enableEditing: false,
+        enableEditing: true,
         Cell: ({ row }) => {
           const totalPrice = row.getValue('totalPrice');
           return totalPrice.toLocaleString('es-CO', {
@@ -184,7 +184,7 @@ export default function OrdersList() {
           const orderDate = new Date(row.getValue('deadline'));
           return orderDate.toLocaleDateString();
         },
-        enableEditing: false,
+        enableEditing: true,
       },
       {
         accessorKey: 'deliveryDate',
@@ -326,15 +326,11 @@ export default function OrdersList() {
   });
 
   return (
-    <>
-      <a href='/' className={styles.back}>
-        {' '}
-        ←{' '}
-      </a>
-      <h1 className={styles.ListTitle}>Lista de Pedidos</h1>
+    <div>
+      <HeaderTitle title='Lista de Pedidos' />
       <div>
         <MaterialReactTable table={table} />
       </div>
-    </>
+    </div>
   );
 }

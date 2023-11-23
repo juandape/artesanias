@@ -91,7 +91,6 @@ export default function ClientsForm() {
           className={styles.Form__container__input}
           onChange={handleChange}
           maxLength={10}
-          required
         />
 
         <label className={styles.Form_container_label}>Dirección:</label>
@@ -102,7 +101,6 @@ export default function ClientsForm() {
           placeholder='calle 123 # 123-123'
           className={styles.Form__container__input}
           onChange={handleChange}
-          required
         />
 
         <label className={styles.Form_container_label}>Barrio:</label>
@@ -113,7 +111,6 @@ export default function ClientsForm() {
           placeholder='barrio'
           className={styles.Form__container__input}
           onChange={handleChange}
-          required
         />
 
         <label className={styles.Form_container_label}>Ciudad:</label>
@@ -124,7 +121,6 @@ export default function ClientsForm() {
           placeholder='ingresa la ciudad'
           className={styles.Form__container__input}
           onChange={handleChange}
-          required
         />
 
         <label className={styles.Form_container_label}>Instagram:</label>

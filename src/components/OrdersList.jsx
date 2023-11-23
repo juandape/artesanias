@@ -87,9 +87,14 @@ export default function OrdersList() {
     () => [
       {
         accessorKey: '_id',
-        header: 'Id',
+        header: 'Numero Pedido',
         enableEditing: false,
         size: 50,
+        Cell: ({ row }) => {
+          const fullId = row.getValue('_id');
+          const lastFourDigits = fullId.slice(-4); // Obtener los últimos cuatro dígitos
+          return lastFourDigits;
+        },
       },
       {
         accessorKey: 'line',

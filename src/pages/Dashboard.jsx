@@ -134,6 +134,16 @@ const Dashboard = () => {
             <h2 className={styles.dashboard__sectionBox__listTitle}>Resumen</h2>
           </Link>
         </div>
+        <div >
+          <a href='https://juandape.dev' target='_blank' className={styles.footer}>
+            <p>
+              <strong>Copyright © 2023. All rights reserved.</strong>
+            </p>
+            <p>
+              <strong>App by @juandape</strong>
+            </p>
+          </a>
+        </div>
       </div>
     </>
   );

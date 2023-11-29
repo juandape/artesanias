@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1 className={styles.dashboard__title}>In Kontrol Dashboard</h1>
+      <h1 className={styles.dashboard__title}>Menu In-Kontrol</h1>
       <div className={styles.dashboard__container}>
         <div className={styles.dashboard__sectionBox}>
           <h2

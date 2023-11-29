@@ -140,7 +140,7 @@ const Dashboard = () => {
               <strong>Copyright © 2023. All rights reserved.</strong>
             </p>
             <p>
-              <strong>App by @juandape</strong>
+              <strong>By @juandape</strong>
             </p>
           </a>
         </div>

@@ -92,10 +92,11 @@
   justify-content: center;
   align-items: center;
   height: 50px;
-  width: 300px;
+  width: 320px;
   background-color: rgba(128, 128, 128, 0.403);
   color: #fff;
   margin: 100px auto 0;
+  border-radius: 50px;
 }
 
 .footer:hover {
